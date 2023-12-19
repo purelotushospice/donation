@@ -70,7 +70,7 @@ export default async function Page() {
         </h1>
         <p>
           Join us in laying the foundation for compassionate care—brick by
-          brick, we build a home for comfort and dignity in life's final
+          brick, we build a home for comfort and dignity in life final
           journey.
         </p>
       </div>
