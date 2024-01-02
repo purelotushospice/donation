@@ -50,7 +50,7 @@ const onSubmit = async (data) => {
     .then((response) => response.json())
     .then((data2) => {
       console.log("data response: ", data2);
-      // window.location.replace(data2?.data?.checkout_url);
+      window.location.replace(data2?.data?.checkout_url);
     })
     .catch((error) => {
       console.error("Error:", error);
