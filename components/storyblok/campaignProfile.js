@@ -13,8 +13,8 @@ const tabs = [
   { name: "Comments", href: "#", current: false },
   { name: "Community", href: "#", current: false },
 ];
-const CampaignProfile = ({ data }) => {
-  //   console.log("campaign profile:",data)
+const CampaignProfile = ({ data, generalContent }) => {
+  console.log("campaign general:", generalContent);
   let c_data = data?.story;
   return (
     <div className="">
@@ -66,7 +66,7 @@ const CampaignProfile = ({ data }) => {
                 href={"/checkout"}
                 className="bg-[#02AA9F] text-white font-semibold px-6 py-1.5 w-full"
               >
-                Donate to this campaign
+                {generalContent?.content.cta_primary}
               </Link>
               <button className="bg-[#C5C5C5] text-black font-semibold px-6 py-1.5 w-full">
                 Remind me

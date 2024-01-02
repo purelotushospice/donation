@@ -13,6 +13,8 @@ export default async function Page({ params }) {
     cv: Math.random(),
   });
 
+  console.log("kajsj: ",data);
+
   let c_Profile = "";
   if (
     !!data?.story?.content?.campaign &&
@@ -28,7 +30,7 @@ export default async function Page({ params }) {
   return (
     <div>
       {/* <MetaTags data={data?.story?.content?.meta} /> */}
-      <CampaignProfile data={c_Profile} />
+      <CampaignProfile data={c_Profile} generalContent={data?.story} />
     </div>
   );
 }
@@ -68,9 +70,9 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params, searchParams }, parent) {
   // read route params
-  
+
   let slug = params.slug ? params.slug.join("/") : "home";
-  console.log("params: ",slug);
+  console.log("params: ", slug);
   const storyblokApi = getStoryblokApi();
   let { data } = await storyblokApi.get(`cdn/stories/${slug}`, {
     version: "draft",
@@ -84,7 +86,11 @@ export async function generateMetadata({ params, searchParams }, parent) {
   // const previousImages = (await parent).openGraph?.images || []
 
   return {
-    title: !!data?.story?.content?.meta ? data?.story?.content?.meta[0]?.meta_title : "",
-    description: !!data?.story?.content?.meta ? data?.story?.content?.meta[0]?.meta_description : "",
+    title: !!data?.story?.content?.meta
+      ? data?.story?.content?.meta[0]?.meta_title
+      : "",
+    description: !!data?.story?.content?.meta
+      ? data?.story?.content?.meta[0]?.meta_description
+      : "",
   };
 }

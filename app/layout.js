@@ -11,7 +11,7 @@ import Footer from "@/components/footer";
 // };
 
 storyblokInit({
-  accessToken: "XtlygAGFb9OoujsiDLFLFwtt",
+  accessToken: process.env.STORYBLOK_API_KEY,
   use: [apiPlugin],
 });
 export default function RootLayout({ children }) {
