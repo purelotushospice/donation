@@ -2,10 +2,14 @@
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
+import { useRouter } from "next/router";
 
 const Card = ({ data, completed }) => (
   // console.log(completed)
   <div
+    onClick={() =>
+      router.push("/cause/building-bricks-for-home-of-compassions")
+    }
     className={classNames(
       completed ? "opacity-50" : "",
       "rounded-xl border border-gray-200 "

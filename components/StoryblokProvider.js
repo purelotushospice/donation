@@ -6,12 +6,14 @@ import Page from "./Page";
 import Teaser from "./Teaser";
 import Feature from "./Feature";
 import Grid from "./Grid";
+import MetaTags from "./storyblok/metaTags";
 /** 2. Initialize it as usual */
 const components = {
     feature: Feature,
     grid: Grid,
     teaser: Teaser,
     page: Page,
+    nestable_MetaTags:MetaTags
   };
 storyblokInit({
   accessToken: "XtlygAGFb9OoujsiDLFLFwtt",
