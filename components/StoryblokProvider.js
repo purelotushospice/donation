@@ -16,7 +16,7 @@ const components = {
     nestable_MetaTags:MetaTags
   };
 storyblokInit({
-  accessToken: STORYBLOK_API_KEY,
+  accessToken: process.env.STORYBLOK_API_KEY,
   use: [apiPlugin],
   components
 });
