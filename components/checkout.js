@@ -39,7 +39,7 @@ const donationAmounts = [
 
 const onSubmit = async (data) => {
   console.log("submited data: ", data);
-  fetch(`https://pure-lotus.onrender.com/payment/chip`, {
+  await fetch(`https://pure-lotus.onrender.com/payment/chip`, {
     method: "POST", // or 'PUT'
     headers: {
       "Content-Type": "application/json",
