@@ -13,8 +13,9 @@ const tabs = [
   { name: "Comments", href: "#", current: false },
   { name: "Community", href: "#", current: false },
 ];
+
 const CampaignProfile = ({ data, generalContent }) => {
-  console.log("campaign general:", generalContent);
+  // console.log("campaign general:", generalContent);
   let c_data = data?.story;
   return (
     <div className="">
@@ -96,7 +97,7 @@ const CampaignProfile = ({ data, generalContent }) => {
           </div>
         </div>
       </div>
-      <Tab data={tabs} />
+      <Tab data={tabs} generalContent={generalContent}/>
     </div>
   );
 };

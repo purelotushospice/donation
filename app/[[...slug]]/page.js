@@ -13,7 +13,7 @@ export default async function Page({ params }) {
     cv: Math.random(),
   });
 
-  console.log("kajsj: ",data);
+  // console.log("kajsj: ",data.story.content.details);
 
   let c_Profile = "";
   if (
@@ -72,13 +72,13 @@ export async function generateMetadata({ params, searchParams }, parent) {
   // read route params
 
   let slug = params.slug ? params.slug.join("/") : "home";
-  console.log("params: ", slug);
+  // console.log("params: ", slug);
   const storyblokApi = getStoryblokApi();
   let { data } = await storyblokApi.get(`cdn/stories/${slug}`, {
     version: "draft",
     cv: Math.random(),
   });
-  console.log("dattsass: ", data);
+  // console.log("dattsass: ", data);
   // // fetch data
   // const product = await fetch(`https://.../${id}`).then((res) => res.json())
 

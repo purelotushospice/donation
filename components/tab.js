@@ -3,7 +3,21 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 import { useState } from "react";
-export default function Tab({ data }) {
+import StoryblokClient from "storyblok-js-client";
+import RichTextResolver from "storyblok-js-client/richTextResolver";
+
+export default function Tab({ data, generalContent }) {
+  console.log("generalContent in Tab: ", generalContent.content);
+
+  let Storyblok = new StoryblokClient({
+    accessToken: process.env.STORYBLOK_API_KEY,
+  });
+  const renderRichText = (content) => {
+    const resolver = new RichTextResolver();
+    // return  resolver.render(content)
+    return Storyblok.richTextResolver.render(content);
+  };
+
   const [currentTab, setCurrentTab] = useState(0);
   const handleCurrentTab = (tabIndex) => {
     setCurrentTab(tabIndex);
@@ -19,7 +33,7 @@ export default function Tab({ data }) {
                   <a
                     key={tab.name}
                     href={tab.href}
-                    onClick={()=> handleCurrentTab(index)}
+                    onClick={() => handleCurrentTab(index)}
                     className={classNames(
                       currentTab === index
                         ? "border-black text-black font-bold"
@@ -38,40 +52,37 @@ export default function Tab({ data }) {
       </div>
 
       <div className="mt-4">
-        {
-            currentTab === 0 ? <>  <h3 className="font-bold ">Story</h3>
+        {currentTab === 0 ? (
+          <>
+            {" "}
+            {/* <h3 className="font-bold ">Story</h3> */}
             <div className="space-y-1">
-              <p>
-                Cupidatat occaecat adipisicing reprehenderit qui consectetur et.
-                Nisi aliqua aute mollit elit laboris cupidatat tempor eu eiusmod.
-                Eiusmod. Esse amet veniam elit veniam laborum ad id aliqua et.
-                Officia sunt nulla veniam nostrud nostrud consequat. Do labore
-                exercitation eu pariatur. Do qui laborum proident eu reprehenderit
-                consequat laboris nulla. In id sit nisi sint do reprehenderit
-                occaecat.
-              </p>
-              <p>
-                Ea non ullamco voluptate fugiat nulla Lorem aliquip eu. Nostrud
-                mollit proident reprehenderit nulla ad. Nostrud labore et incididunt
-                cillum. Aliquip cupidatat consectetur culpa reprehenderit dolor
-                culpa sit non est. Eu anim ipsum nostrud adipisicing. Ad nostrud.
-                Culpa ad cupidatat elit commodo. Ex qui ex culpa enim. Consectetur
-                pariatur.
-              </p>
-              <p>
-                Sit exercitation exercitation velit elit deserunt commodo.
-                Reprehenderit. Laborum anim amet anim id amet. Minim sit nostrud
-                exercitation veniam proident id ea cupidatat id. Ipsum dolore
-                deserunt fugiat Lorem eu dolore est non deserunt. Sunt cillum duis
-                ex dolor amet voluptate.s
-              </p>
-              <p>
-                Enim adipisicing. Ea commodo laboris esse. Sunt in aute nostrud
-                tempor sit esse sit Lorem nulla.
-              </p>
-            </div></> : null
-        }
-      
+              <div
+                className="my-3 w-full"
+                dangerouslySetInnerHTML={{
+                  __html: renderRichText(
+                    generalContent.content.details[0].content
+                  ),
+                }}
+              ></div>
+            </div>
+          </>
+        ) : currentTab === 1 ? (
+          <>
+            {" "}
+            {/* <h3 className="font-bold ">Story</h3> */}
+            <div className="space-y-1">
+              <div
+                className="my-3 w-full"
+                dangerouslySetInnerHTML={{
+                  __html: renderRichText(
+                    generalContent.content.updates[0].content
+                  ),
+                }}
+              ></div>
+            </div>
+          </>
+        ) : null}
       </div>
     </div>
   );
