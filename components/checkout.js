@@ -43,13 +43,10 @@ const onSubmit = async (data) => {
     method: "POST", // or 'PUT'
     headers: {
       "Content-Type": "application/json",
-      //   'Access-Control-Allow-Origin': "http://localhost:3000"
     },
-    // body: JSON.stringify(obj),
   })
     .then((response) => response.json())
     .then((data2) => {
-      // console.log("data response: ", data2);
       window.location.replace(data2?.data?.checkout_url);
     })
     .catch((error) => {
@@ -72,138 +69,69 @@ const Checkout = ({ data, completed }) => {
     <div className="bg-white">
       {/* Background color split screen for large screens */}
       <div
-        className="fixed left-0 top-0 hidden h-full w-1/2 bg-white lg:block"
+        className="fixed left-0 top-0 hidden h-full  bg-white lg:block"
         aria-hidden="true"
       />
       <div
-        className="fixed right-0 top-0 hidden h-full w-1/2 bg-gray-50 lg:block"
+        className="fixed right-0 top-0 hidden h-full  bg-gray-50 lg:block"
         aria-hidden="true"
       />
 
-      <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-x-16 lg:grid-cols-2 lg:px-8 xl:gap-x-48">
-        <h1 className="sr-only">Order information</h1>
-
-        <section
-          aria-labelledby="summary-heading"
-          className="bg-gray-50 px-4 pb-10 pt-16 sm:px-6 lg:col-start-2 lg:row-start-1 lg:bg-transparent lg:px-0 lg:pb-16"
-        >
-          <div className="mx-auto max-w-lg lg:max-w-none">
-            <h2
-              id="summary-heading"
-              className="text-lg font-medium text-gray-900"
-            >
-              Donation summary
-            </h2>
-
-            <ul
-              role="list"
-              className="divide-y divide-gray-200 text-sm font-medium text-gray-900"
-            >
-              {products.map((product) => (
-                <li
-                  key={product.id}
-                  className="flex items-start space-x-4 py-6"
-                >
-                  <img
-                    src={product.imageSrc}
-                    alt={product.imageAlt}
-                    className="h-10 w-10 flex-none rounded-md object-cover object-center"
-                  />
-                  <div className="flex-auto space-y-1">
-                    <h3>{product.name}</h3>
-                    {/* <p className="text-gray-500">{product.color}</p>
-                  <p className="text-gray-500">{product.size}</p> */}
-                  </div>
-                  <p className="flex-none text-base font-medium">
-                  RM {chooseAmount}
-                  </p>
-                </li>
-              ))}
-            </ul>
-
-            <dl className="hidden space-y-6 border-t border-gray-200 pt-6 text-sm font-medium text-gray-900 lg:block">
-              <div className="flex items-center justify-between">
-                <dt className="text-gray-600">Subtotal</dt>
-                <dd>RM{chooseAmount}</dd>
-              </div>
-
-              <div className="flex items-center justify-between border-t border-gray-200 pt-6">
-                <dt className="text-base">Total</dt>
-                <dd className="text-base">RM{chooseAmount+1}</dd>
-              </div>
-            </dl>
-
-            <Popover className="fixed inset-x-0 bottom-0 flex flex-col-reverse text-sm font-medium text-gray-900 lg:hidden">
-              <div className="relative z-10 border-t border-gray-200 bg-white px-4 sm:px-6">
-                <div className="mx-auto max-w-lg">
-                  <Popover.Button className="flex w-full items-center py-6 font-medium">
-                    <span className="mr-auto text-base">Total</span>
-                    <span className="mr-2 text-base">$361.80</span>
-                    <ChevronUpIcon
-                      className="h-5 w-5 text-gray-500"
-                      aria-hidden="true"
-                    />
-                  </Popover.Button>
-                </div>
-              </div>
-
-              <Transition.Root as={Fragment}>
-                <div>
-                  <Transition.Child
-                    as={Fragment}
-                    enter="transition-opacity ease-linear duration-300"
-                    enterFrom="opacity-0"
-                    enterTo="opacity-100"
-                    leave="transition-opacity ease-linear duration-300"
-                    leaveFrom="opacity-100"
-                    leaveTo="opacity-0"
-                  >
-                    <Popover.Overlay className="fixed inset-0 bg-black bg-opacity-25" />
-                  </Transition.Child>
-
-                  <Transition.Child
-                    as={Fragment}
-                    enter="transition ease-in-out duration-300 transform"
-                    enterFrom="translate-y-full"
-                    enterTo="translate-y-0"
-                    leave="transition ease-in-out duration-300 transform"
-                    leaveFrom="translate-y-0"
-                    leaveTo="translate-y-full"
-                  >
-                    <Popover.Panel className="relative bg-white px-4 py-6 sm:px-6">
-                      <dl className="mx-auto max-w-lg space-y-6">
-                        <div className="flex items-center justify-between">
-                          <dt className="text-gray-600">Subtotal</dt>
-                          <dd>$320.00</dd>
-                        </div>
-
-                        <div className="flex items-center justify-between">
-                          <dt className="text-gray-600">Shipping</dt>
-                          <dd>$15.00</dd>
-                        </div>
-
-                        <div className="flex items-center justify-between">
-                          <dt className="text-gray-600">Taxes</dt>
-                          <dd>$26.80</dd>
-                        </div>
-                      </dl>
-                    </Popover.Panel>
-                  </Transition.Child>
-                </div>
-              </Transition.Root>
-            </Popover>
-          </div>
-        </section>
-
+      <div className="relative mx-auto grid max-w-xl grid-cols-1 gap-x-16  lg:px-8 xl:gap-x-48">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="px-4 pb-36 pt-16 sm:px-6 lg:col-start-1 lg:row-start-1 lg:px-0 lg:pb-16"
         >
-          <div className="mx-auto max-w-lg lg:max-w-none">
+          <div className="mx-auto max-w-md lg:max-w-none">
             <section aria-labelledby="contact-info-heading">
               <h2
                 id="contact-info-heading"
-                className="text-lg font-medium text-gray-900"
+                className="text-lg font-medium text-gray-900 mt-4"
+              >
+                Donate amount
+              </h2>
+              <div className="mt-6 flex gap-4">
+                {donationAmounts.map((item, index) => {
+                  return (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setCurrent(index), setChooseAmount(item?.value);
+                      }}
+                      key={index}
+                      className={classNames(
+                        current === index
+                          ? "bg-indigo-800 text-white"
+                          : "bg-gray-200 text-gray-500",
+                        "   font-bold py-2 px-10 border rounded"
+                      )}
+                    >
+                      {item?.name}
+                    </button>
+                  );
+                })}
+              </div>
+              <div className="mt-6">
+                <label
+                  htmlFor="email-address"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Custom amount
+                </label>
+                <div className="mt-1">
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    {...register("name")}
+                    // autoComplete="email"
+                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  />
+                </div>
+              </div>
+              <h2
+                id="contact-info-heading"
+                className="text-lg font-medium text-gray-900 mt-4"
               >
                 Contact information
               </h2>
@@ -278,25 +206,6 @@ const Checkout = ({ data, completed }) => {
                     className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                   />
                 </div>
-              </div>
-
-              <div className="mt-6 flex gap-1">
-                {donationAmounts.map((item, index) => {
-                  return (
-                    <button
-                      onClick={
-                        (() => {setCurrent(index), setChooseAmount(item?.value)})
-                      }
-                      key={index}
-                      className={classNames(
-                        current === index ? "bg-indigo-800" : "bg-indigo-600",
-                        " hover:bg-indigo-700 text-white font-bold py-2 px-4 border border-indigo-700 rounded"
-                      )}
-                    >
-                      {item?.name}
-                    </button>
-                  );
-                })}
               </div>
             </section>
 

@@ -56,31 +56,34 @@ export default function Tab({ data, generalContent }) {
           <>
             {" "}
             {/* <h3 className="font-bold ">Story</h3> */}
-            <div className="space-y-1">
-              <div
-                className="my-3 w-full"
-                dangerouslySetInnerHTML={{
-                  __html: renderRichText(
-                    generalContent.content.details[0].content
-                  ),
-                }}
-              ></div>
-            </div>
+            {!!generalContent?.content?.details && (
+              <div className="space-y-1">
+                <div
+                  className="my-3 w-full"
+                  dangerouslySetInnerHTML={{
+                    __html: renderRichText(
+                      generalContent?.content?.details[0].content
+                    ),
+                  }}
+                ></div>
+              </div>
+            )}
           </>
         ) : currentTab === 1 ? (
           <>
-            {" "}
+            {!!generalContent?.content?.updates && (
+              <div className="space-y-1">
+                <div
+                  className="my-3 w-full"
+                  dangerouslySetInnerHTML={{
+                    __html: renderRichText(
+                      generalContent?.content?.updates[0].content
+                    ),
+                  }}
+                ></div>
+              </div>
+            )}
             {/* <h3 className="font-bold ">Story</h3> */}
-            <div className="space-y-1">
-              <div
-                className="my-3 w-full"
-                dangerouslySetInnerHTML={{
-                  __html: renderRichText(
-                    generalContent.content.updates[0].content
-                  ),
-                }}
-              ></div>
-            </div>
           </>
         ) : null}
       </div>
