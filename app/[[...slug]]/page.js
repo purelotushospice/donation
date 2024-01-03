@@ -49,41 +49,35 @@ export async function generateStaticParams() {
     if (slug == "profile") {
       return;
     }
-    if (slug == "/") {
+    if (slug == "") {
+      return;
+    }
+    if (slug == "home") {
       return;
     }
 
     let splittedSlug = slug.split("/");
+
     if (
-      splittedSlug.length > 1 &&
-      splittedSlug[0] === "profile" &&
-      splittedSlug[0] === ""
+      (splittedSlug.length > 1 && splittedSlug[0] === "profile") ||
+      splittedSlug[0] === "" ||
+      splittedSlug[0] === "home"
     ) {
       return;
     }
     paths.push({ slug: splittedSlug });
   });
 
-  // console.log("path: ", paths);
   return paths;
 }
 
 export async function generateMetadata({ params, searchParams }, parent) {
-  // read route params
-
   let slug = params.slug ? params.slug.join("/") : "home";
-  // console.log("params: ", slug);
   const storyblokApi = getStoryblokApi();
   let { data } = await storyblokApi.get(`cdn/stories/${slug}`, {
     version: "draft",
     cv: Math.random(),
   });
-  // console.log("dattsass: ", data);
-  // // fetch data
-  // const product = await fetch(`https://.../${id}`).then((res) => res.json())
-
-  // // optionally access and extend (rather than replace) parent metadata
-  // const previousImages = (await parent).openGraph?.images || []
 
   return {
     title: !!data?.story?.content?.meta

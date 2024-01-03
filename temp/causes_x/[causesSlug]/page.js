@@ -14,7 +14,7 @@ function classNames(...classes) {
 
 export default async function Page() {
   const { data } = await fetchData();
-  console.log("data  ", data.story.content.body[0]);
+  // console.log("data  ", data.story.content.body[0]);
   const pages = [{ name: "Home", href: "/home", current: false }];
   let content_1 = [
     {

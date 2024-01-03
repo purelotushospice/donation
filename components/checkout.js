@@ -38,7 +38,7 @@ const donationAmounts = [
 ];
 
 const onSubmit = async (data) => {
-  console.log("submited data: ", data);
+  // console.log("submited data: ", data);
   await fetch(`https://pure-lotus.onrender.com/payment/chip`, {
     method: "POST", // or 'PUT'
     headers: {
@@ -49,7 +49,7 @@ const onSubmit = async (data) => {
   })
     .then((response) => response.json())
     .then((data2) => {
-      console.log("data response: ", data2);
+      // console.log("data response: ", data2);
       window.location.replace(data2?.data?.checkout_url);
     })
     .catch((error) => {
@@ -61,7 +61,7 @@ const Checkout = ({ data, completed }) => {
   // console.log(completed)
   const [current, setCurrent] = useState(0);
   const [chooseAmount, setChooseAmount] = useState(null);
-  console.log("chooseAmountchooseAmount: ",chooseAmount);
+  // console.log("chooseAmountchooseAmount: ",chooseAmount);
   const {
     register,
     handleSubmit,

@@ -5,7 +5,7 @@ function classNames(...classes) {
 
 const MetaTags = ({ data,c_Profile }) => {
   
-  console.log("meta:",data)
+  // console.log("meta:",data)
  return <div></div>
 }
 
