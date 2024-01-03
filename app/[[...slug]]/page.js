@@ -49,9 +49,12 @@ export async function generateStaticParams() {
     if (slug == "profile") {
       return;
     }
-    if (slug == "") {
-      return;
-    }
+    // if (slug == "") {
+    //   return;
+    // }
+    // if (slug == "/") {
+    //   return;
+    // }
     if (slug == "home") {
       return;
     }
@@ -60,7 +63,8 @@ export async function generateStaticParams() {
 
     if (
       (splittedSlug.length > 1 && splittedSlug[0] === "profile") ||
-      splittedSlug[0] === "" ||
+      // splittedSlug[0] === "" ||
+      // splittedSlug[0] === "/" ||
       splittedSlug[0] === "home"
     ) {
       return;
