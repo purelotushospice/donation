@@ -7,7 +7,7 @@ import {
   
   export default async function Home() {
     const { data } = await fetchData();
-    console.log("data  ", data.story.content.body[0]);
+    // console.log("data  ", data.story.content.body[0]);
     return (
       <div>
        <Checkout/>

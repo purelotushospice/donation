@@ -1,20 +1,24 @@
-'use client'
-import { useState } from 'react'
-import { Dialog } from '@headlessui/react'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-
+"use client";
+import { useState } from "react";
+import { Dialog } from "@headlessui/react";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
 const navigation = [
-  { name: 'Our Causes', href: '#' },
-  { name: 'Wall of Love', href: '#' },
-
-]
+  { name: "Our Causes", href: "#", disable: false },
+  { name: "Wall of Love", href: "#", disable: true },
+];
 
 export default function Header() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <header className="bg-white">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between gap-x-6 p-6 lg:px-8" aria-label="Global">
+      <nav
+        className="mx-auto flex max-w-7xl items-center justify-between gap-x-6 p-6 lg:px-8"
+        aria-label="Global"
+      >
         <div className="flex lg:flex-1">
           <a href="/home" className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
@@ -22,14 +26,21 @@ export default function Header() {
           </a>
         </div>
         <div className="hidden lg:flex lg:gap-x-12">
-          {/* {navigation.map((item) => (
-            <a key={item.name} href={item.href} className="text-sm font-semibold leading-6 text-gray-900">
+          {navigation.map((item) => (
+            <button
+              disabled={item.disable ? true : false}
+              key={item.name}
+              href={item.href}
+              className={classNames(
+                item.disable ? " text-gray-300" : "text-gray-900",
+                "text-sm font-semibold leading-6 "
+              )}
+            >
               {item.name}
-            </a>
-          ))} */}
+            </button>
+          ))}
         </div>
         <div className="flex flex-1 items-center justify-end gap-x-6">
-         
           <a
             href="#"
             className="rounded-2xl bg-[#02AA9F] px-5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
@@ -48,7 +59,12 @@ export default function Header() {
           </button>
         </div>
       </nav>
-      <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
+      <Dialog
+        as="div"
+        className="lg:hidden"
+        open={mobileMenuOpen}
+        onClose={setMobileMenuOpen}
+      >
         <div className="fixed inset-0 z-10" />
         <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center gap-x-6">
@@ -101,5 +117,5 @@ export default function Header() {
         </Dialog.Panel>
       </Dialog>
     </header>
-  )
+  );
 }

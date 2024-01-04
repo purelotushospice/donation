@@ -38,8 +38,7 @@ const donationAmounts = [
 ];
 
 const onSubmit = async (data) => {
-  // console.log("submited data: ", data);
-  await fetch(`https://pure-lotus.onrender.com/payment/chip`, {
+  await fetch(`http://localhost:3001/payment/chip`, {
     method: "POST", // or 'PUT'
     headers: {
       "Content-Type": "application/json",
@@ -205,6 +204,66 @@ const Checkout = ({ data, completed }) => {
                     // autoComplete="email"
                     className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                   />
+                </div>
+              </div>
+
+              <h2
+                id="contact-info-heading"
+                className="text-lg font-medium text-gray-900 mt-4"
+              >
+                Payment method
+              </h2>
+              <div className="flex mt-4">
+                <div className="flex items-center h-5">
+                  <input
+                    id="helper-radio"
+                    aria-describedby="helper-radio-text"
+                    type="radio"
+                    value=""
+                    checked
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500   focus:ring-2 "
+                  />
+                </div>
+                <div className="ms-2 text-sm">
+                  <label
+                    for="helper-radio"
+                    className="font-medium text-gray-900 
+                    "
+                  >
+                    FPX B2C
+                  </label>
+                  <p
+                    id="helper-radio-text"
+                    className="text-xs font-normal text-gray-500 "
+                  >
+                    Power by CHIP
+                  </p>
+                </div>
+              </div>
+              <div className="flex mt-2">
+                <div className="flex items-center h-5">
+                  <input
+                    id="helper-radio"
+                    aria-describedby="helper-radio-text"
+                    type="radio"
+                    value=""
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600"
+                  />
+                </div>
+                <div className="ms-2 text-sm">
+                  <label
+                    for="helper-radio"
+                    className="font-medium text-gray-900 
+                    "
+                  >
+                    FPX B2B1
+                  </label>
+                  <p
+                    id="helper-radio-text"
+                    className="text-xs font-normal text-gray-500 "
+                  >
+                    Power by CHIP
+                  </p>
                 </div>
               </div>
             </section>
