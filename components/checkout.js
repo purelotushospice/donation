@@ -7,6 +7,9 @@ import { Popover, Transition } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/20/solid";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import Link from "next/link";
+import { useRouter,useParams  } from "next/navigation";
+
 const products = [
   {
     id: 1,
@@ -37,26 +40,12 @@ const donationAmounts = [
   },
 ];
 
-const onSubmit = async (data) => {
-  await fetch(`http://localhost:3001/payment/chip`, {
-    method: "POST", // or 'PUT'
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((response) => response.json())
-    .then((data2) => {
-      window.location.replace(data2?.data?.checkout_url);
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
-};
-
 const Checkout = ({ data, completed }) => {
+
+
   // console.log(completed)
   const [current, setCurrent] = useState(0);
-  const [chooseAmount, setChooseAmount] = useState(null);
+  const [chooseAmount, setChooseAmount] = useState(50);
   // console.log("chooseAmountchooseAmount: ",chooseAmount);
   const {
     register,
@@ -64,6 +53,52 @@ const Checkout = ({ data, completed }) => {
     watch,
     formState: { errors },
   } = useForm();
+
+  const router = useRouter();
+
+  // Function to go back to the previous page
+  const goBack = () => {
+    router.back();
+  };
+
+  // State to manage the selected value
+  const [selectedOption, setSelectedOption] = useState("fpx");
+
+  // Function to handle radio button changes
+  const handleRadioChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
+  // const { id } = router.query;
+  const params = useParams()
+
+  console.log("params: ",params);
+  const onSubmit = async (data) => {
+    let obj = {
+      amount: chooseAmount,
+      name: data?.name,
+      phone:data?.phone,
+      email: data?.email,
+      notes: data?.notes,
+      paymentMethod:selectedOption,
+      campaign_code:params?.id
+    };
+
+    console.log("obj: ",obj);
+    await fetch(`http://localhost:3001/payment/chip`, {
+      method: "POST", // or 'PUT'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(obj),
+    })
+      .then((response) => response.json())
+      .then((data2) => {
+        window.location.replace(data2?.data?.checkout_url);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
   return (
     <div className="bg-white">
       {/* Background color split screen for large screens */}
@@ -71,15 +106,33 @@ const Checkout = ({ data, completed }) => {
         className="fixed left-0 top-0 hidden h-full  bg-white lg:block"
         aria-hidden="true"
       />
+
       <div
         className="fixed right-0 top-0 hidden h-full  bg-gray-50 lg:block"
         aria-hidden="true"
       />
 
+      <button onClick={() => goBack()}>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 32 32"
+          stroke-width="1.5"
+          stroke="currentColor"
+          className="w-10 h-10"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18"
+          />
+        </svg>
+      </button>
+
       <div className="relative mx-auto grid max-w-xl grid-cols-1 gap-x-16  lg:px-8 xl:gap-x-48">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="px-4 pb-36 pt-16 sm:px-6 lg:col-start-1 lg:row-start-1 lg:px-0 lg:pb-16"
+          className="px-4 pb-36 sm:px-6 lg:col-start-1 lg:row-start-1 lg:px-0 lg:pb-16"
         >
           <div className="mx-auto max-w-md lg:max-w-none">
             <section aria-labelledby="contact-info-heading">
@@ -119,11 +172,11 @@ const Checkout = ({ data, completed }) => {
                 </label>
                 <div className="mt-1">
                   <input
+                  disabled
                     type="text"
-                    id="name"
-                    name="name"
-                    {...register("name")}
-                    // autoComplete="email"
+                    id="customAmount"
+                    name="customAmount"
+                    {...register("customAmount")}
                     className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                   />
                 </div>
@@ -136,7 +189,7 @@ const Checkout = ({ data, completed }) => {
               </h2>
               <div className="mt-6">
                 <label
-                  htmlFor="email-address"
+                  htmlFor="name"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Name
@@ -154,7 +207,7 @@ const Checkout = ({ data, completed }) => {
               </div>
               <div className="mt-6">
                 <label
-                  htmlFor="email-address"
+                  htmlFor="email"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Email address
@@ -219,8 +272,9 @@ const Checkout = ({ data, completed }) => {
                     id="helper-radio"
                     aria-describedby="helper-radio-text"
                     type="radio"
-                    value=""
-                    checked
+                    value="fpx"
+                    checked={selectedOption === "fpx"}
+                    onChange={handleRadioChange}
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500   focus:ring-2 "
                   />
                 </div>
@@ -246,7 +300,9 @@ const Checkout = ({ data, completed }) => {
                     id="helper-radio"
                     aria-describedby="helper-radio-text"
                     type="radio"
-                    value=""
+                    value="fpx_b2b1"
+                    checked={selectedOption === "fpx_b2b1"}
+                    onChange={handleRadioChange}
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600"
                   />
                 </div>

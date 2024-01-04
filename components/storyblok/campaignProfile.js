@@ -18,7 +18,7 @@ const CampaignProfile = ({ data, generalContent }) => {
   console.log("campaign: ", data);
   let c_data = data?.story;
   const handleClick = (e) => {
-    router.push("/checkout");
+    router.push(`/checkout/${data?.story?.content?.code}`);
   };
 
   const { data: responseStat, error } = useSWR(
