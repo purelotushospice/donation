@@ -1,5 +1,4 @@
-import Checkout from "@/components/checkout";
-import CheckoutV2 from "@/components/checkoutV2";
+
 import CheckoutV3 from "@/components/checkoutV3";
 import {
     getStoryblokApi,
