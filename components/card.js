@@ -2,12 +2,13 @@
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-const Card = ({ data, completed,collPercentage }) => (
-  // console.log(completed)
-  <>
+const Card = ({ data, completed,collPercentage }) => {
+  console.log("data; ", data)
+ return  <>
     {" "}
     <Link href={"/causes/building-bricks-for-home-of-compassion"}>
       <div
@@ -21,9 +22,11 @@ const Card = ({ data, completed,collPercentage }) => (
       >
         <div className="space-y-1">
           <div className="relative group block w-full aspect-w-4 aspect-h-3 rounded-t-lg bg-gray-100 overflow-hidden  ">
-            <img
-              src={data?.img}
+            <Image
+              src={"/purelotus_43.png"}
               className="object-cover pointer-events-none group-hover:opacity-75"
+              width={600}
+              height={400}
             />
           </div>
           <div className="w-full bg-gray-200 rounded-sm h-2.5 dark:bg-gray-400">
@@ -43,6 +46,6 @@ const Card = ({ data, completed,collPercentage }) => (
       </div>
     </Link>
   </>
-);
+};
 
 export default Card;
