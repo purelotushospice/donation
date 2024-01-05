@@ -36,6 +36,52 @@ export default function Tab({ data, generalContent }) {
     }
   };
 
+  function renderTab(data, generalData) {
+    console.log("checkccc", generalData);
+    return (
+      <div className="space-y-1 richtext border border-gray-200 p-4 rounded-lg shadow-lg">
+        <h3 className="font-bold text-lg ">{generalData[0]?.title}</h3>
+        <span className="text-xs text-gray-400">
+          {dateFormat(generalData[0]?.last_updated)}
+        </span>
+        <hr />
+        <div
+          className="my-3 w-full pt-2 "
+          dangerouslySetInnerHTML={{
+            __html: renderRichText(data),
+          }}
+        ></div>
+      </div>
+    );
+  }
+
+  function dateFormat(date, type) {
+    let monthList = [
+      { value: "01", name: "January" },
+      { value: "02", name: "February" },
+      { value: "03", name: "March" },
+      { value: "04", name: "April" },
+      { value: "05", name: "May" },
+      { value: "06", name: "June" },
+      { value: "07", name: "July" },
+      { value: "08", name: "August" },
+      { value: "09", name: "September" },
+      { value: "10", name: "October" },
+      { value: "11", name: "November" },
+      { value: "12", name: "December" },
+    ];
+    if (date !== null && !!date) {
+      const dateObj = date.split("-");
+      console.log("dateObj: ", dateObj);
+      let month = monthList.filter((data) => data.value == dateObj[1]);
+      console.log("filter_month: ", month);
+
+      let day = dateObj[2].split(" ");
+      console.log(day);
+      return `${month[0].name} ${day[0]}, ${dateObj[0]}`;
+    }
+  }
+
   return (
     <div>
       <div className="mt-4 sm:mt-10">
@@ -72,7 +118,7 @@ export default function Tab({ data, generalContent }) {
                       currentTab === index
                         ? "border-black text-black font-bold"
                         : "border-transparent text-gray-500  hover:text-gray-700",
-                      tab.disable? "":"hover:border-gray-300",
+                      tab.disable ? "" : "hover:border-gray-300",
                       "group inline-flex items-center border-b-2 py-4 px-1 text-sm font-medium"
                     )}
                     aria-current={tab.current ? "page" : undefined}
@@ -94,34 +140,19 @@ export default function Tab({ data, generalContent }) {
         {currentTab === 0 ? (
           <>
             {" "}
-            {/* <h3 className="font-bold ">Story</h3> */}
-            {!!generalContent?.content?.details && (
-              <div className="space-y-1">
-                <div
-                  className="my-3 w-full"
-                  dangerouslySetInnerHTML={{
-                    __html: renderRichText(
-                      generalContent?.content?.details[0].content
-                    ),
-                  }}
-                ></div>
-              </div>
-            )}
+            {!!generalContent?.content?.details &&
+              renderTab(
+                generalContent?.content?.details[0].content,
+                generalContent?.content?.details
+              )}
           </>
         ) : currentTab === 1 ? (
           <>
-            {!!generalContent?.content?.updates && (
-              <div className="space-y-1">
-                <div
-                  className="my-3 w-full"
-                  dangerouslySetInnerHTML={{
-                    __html: renderRichText(
-                      generalContent?.content?.updates[0].content
-                    ),
-                  }}
-                ></div>
-              </div>
-            )}
+            {!!generalContent?.content?.updates &&
+              renderTab(
+                generalContent?.content?.updates[0].content,
+                generalContent?.content?.updates
+              )}
             {/* <h3 className="font-bold ">Story</h3> */}
           </>
         ) : null}

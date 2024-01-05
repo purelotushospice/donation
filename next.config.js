@@ -1,4 +1,5 @@
 module.exports = {
-    /* config options here */
-  }
-  
+  images: {
+    domains: ["a.storyblok.com"],
+  },
+};

@@ -1,4 +1,6 @@
 import Checkout from "@/components/checkout";
+import CheckoutV2 from "@/components/checkoutV2";
+import CheckoutV3 from "@/components/checkoutV3";
 import {
     getStoryblokApi,
   
@@ -10,7 +12,7 @@ import {
     // console.log("data  ", data.story.content.body[0]);
     return (
       <div>
-       <Checkout/>
+       <CheckoutV3/>
       </div>
     );
   }

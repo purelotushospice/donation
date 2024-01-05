@@ -2,16 +2,24 @@ import Breadcrumb from "@/components/breadcrumb";
 import Slider from "@/components/slider";
 import { getStoryblokApi } from "@storyblok/react/rsc";
 import StoryblokStory from "@storyblok/react/story";
-
+import useSWR from "swr";
+import { fetcher } from "@/helper/common";
 export default async function Page() {
   const { data } = await fetchData();
+  // const { data: responseStat, error } = useSWR(
+  //   `${process.env.NEXT_PUBLIC_API_BASE_URL}v1/campaign/C01`,
+  //   fetcher
+  // );
+
   // console.log("data  ", data.story.content.body[0]);
   const pages = [{ name: "Home", href: "/home", current: false }];
   let content_1 = [
     {
       img: "purelotus_43.png",
+      code:"C01",
       title: "Building Bricks for Home of Compassion",
       tag: ["Home of Compassion"],
+      targetAmount:2000,
       description: `With each brick laid, we're not just building walls but
       fostering a community of empathy and support. Together, let's
       build a home where compassion thrives and heals.`,
@@ -92,7 +100,7 @@ export default async function Page() {
             <h2 className="font-bold text-3xl pt-4 pb-4">Home of Compassion</h2>
             <Slider data={content_1} />
           </div>
-
+          {/* 
           <div className="mt-8">
             <h2 className="font-bold text-3xl pt-4 pb-4">
               General Fundraising
@@ -105,7 +113,7 @@ export default async function Page() {
               Completed
             </h2>
             <Slider data={content_3} completed={true}/>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

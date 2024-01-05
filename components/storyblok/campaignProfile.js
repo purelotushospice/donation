@@ -1,15 +1,17 @@
 "use client";
 import Tab from "../tab";
-import { useRouter } from "next/navigation";
 import useSWR from "swr";
 import { fetcher } from "helper/common";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+
 const tabs = [
   { name: "Details", href: "#", current: true, disable: false },
   { name: "Updates", href: "#", current: false, disable: false },
-  { name: "FAQ", href: "#", current: false, disable: true },
-  { name: "Comments", href: "#", current: false, disable: true },
-  { name: "Community", href: "#", current: false, disable: true },
+  // { name: "FAQ", href: "#", current: false, disable: true },
+  // { name: "Comments", href: "#", current: false, disable: true },
+  // { name: "Community", href: "#", current: false, disable: true },
 ];
 const CampaignProfile = ({ data, generalContent }) => {
   const [collPercentage, setcollPercentage] = useState(0);
@@ -85,7 +87,7 @@ const CampaignProfile = ({ data, generalContent }) => {
   // Example usage with the given end date "2024-06-30 00:00"
   const endDateStr = "2024-06-30T00:00:00";
   const daysLeft = calculateDaysLeft(endDateStr);
-  
+
   console.log(`Days left until ${endDateStr}: ${daysLeft}`);
   return (
     <div className="m-2 sm:m-0">
@@ -95,13 +97,13 @@ const CampaignProfile = ({ data, generalContent }) => {
 
       <div className="mt-4 grid sm:grid-cols-2 gap-4">
         <div>
-          <img src={data.story.content.cover_image.filename} />
+          <Image src={data.story.content.cover_image.filename} height={200} width={600}/>
         </div>
         <div className="">
           <div className="w-full bg-gray-200 rounded-sm h-2.5 dark:bg-gray-400">
             <div
               className="bg-[#02AA9F] h-2.5 rounded-sm"
-              style={{ width: collPercentage }}
+              style={{ width: `${collPercentage}%` }}
             ></div>
           </div>
 
@@ -126,7 +128,10 @@ const CampaignProfile = ({ data, generalContent }) => {
             </div>
 
             <div className="flex flex-col">
-              <span className="font-bold text-2xl"> {calculateDaysLeft(c_data?.content?.date_end)}</span>
+              <span className="font-bold text-2xl">
+                {" "}
+                {calculateDaysLeft(c_data?.content?.date_end)}
+              </span>
               <span className="text-xs">days to go</span>
             </div>
 
@@ -141,7 +146,7 @@ const CampaignProfile = ({ data, generalContent }) => {
                 </button>
               </div>
               <div></div>
-              <button className="bg-gray-100 text-black font-semibold px-6 py-2 w-full rounded-md flex justify-center gap-2 text-center border border-gray-300">
+              {/* <button className="bg-gray-100 text-black font-semibold px-6 py-2 w-full rounded-md flex justify-center gap-2 text-center border border-gray-300">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -167,7 +172,7 @@ const CampaignProfile = ({ data, generalContent }) => {
                   />
                 </svg>{" "}
                 Remind me
-              </button>
+              </button> */}
 
               <div className="text-sm text-gray-500">
                 This campaign will end on{" "}

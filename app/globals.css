@@ -2,3 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+.richtext div p img {
+  padding: 30px 200px !important ;
+
+  @media (max-width: 500px) {
+    padding: 20px 0px !important;
+  }
+
+  @media (max-width: 800px) {
+    padding: 30px 100px !important;
+  }
+}
+
+.richtext div p {
+  margin-bottom: 20px;
+}
