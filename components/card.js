@@ -20,16 +20,16 @@ const Card = ({ data, completed,collPercentage }) => {
           "rounded-xl border border-gray-200 hover:cursor-pointer"
         )}
       >
-        <div className="space-y-1">
+        <div className="">
           <div className="relative group block w-full aspect-w-4 aspect-h-3 rounded-t-lg bg-gray-100 overflow-hidden  ">
             <Image
-              src={"/purelotus_43.png"}
+              src={"/purelotus_photo_43.png"}
               className="object-cover pointer-events-none group-hover:opacity-75"
               width={600}
               height={400}
             />
           </div>
-          <div className="w-full bg-gray-200 rounded-sm h-2.5 dark:bg-gray-400">
+          <div className="w-full bg-gray-200 rounded-sm dark:bg-gray-300">
             <div
               className="bg-[#02AA9F] h-2.5 rounded-sm"
               style={{ width: `${collPercentage}%` }}
