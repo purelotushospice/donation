@@ -143,7 +143,7 @@ const CheckoutV3 = ({ data, completed }) => {
   };
 
   useEffect(() => {
-    fetchData()
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -261,7 +261,20 @@ const CheckoutV3 = ({ data, completed }) => {
                         type="button"
                         onClick={handleMinus}
                       >
-                        -
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke-width="1.5"
+                          stroke="currentColor"
+                          class="w-6 h-6"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M5 12h14"
+                          />
+                        </svg>
                       </button>
                       <span className="text-xl">{quantity}</span>
                       <button
@@ -269,7 +282,20 @@ const CheckoutV3 = ({ data, completed }) => {
                         type="button"
                         onClick={handlePlus}
                       >
-                        +
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke-width="1.5"
+                          stroke="currentColor"
+                          class="w-6 h-6"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M12 4.5v15m7.5-7.5h-15"
+                          />
+                        </svg>
                       </button>
                     </div>
                   </div>
@@ -528,7 +554,7 @@ const CheckoutV3 = ({ data, completed }) => {
                       aria-describedby="comments-description"
                       name="agree"
                       type="checkbox"
-                      {...register("agree")}
+                      {...register("agree", { required: true })}
                       className="h-4 w-4 rounded border-gray-300 text-teal-600 focus:ring-teal-600"
                     />
                   </div>
@@ -538,6 +564,11 @@ const CheckoutV3 = ({ data, completed }) => {
                     </label>
                   </div>
                 </div>
+                {errors.agree && (
+                  <span className="text-red-500 text-xs">
+                    Please accept the Terms of Service.
+                  </span>
+                )}
               </div>
             </fieldset>
           </div>
@@ -570,9 +601,7 @@ const CheckoutV3 = ({ data, completed }) => {
               <div className=" border-gray-200 px-4 pb-4 sm:px-4">
                 <button
                   type="submit"
-                  disabled={
-                    (watch("agree") ? false : true, loading ? true : false)
-                  }
+                  disabled={loading ? true : false}
                   className="w-full rounded-md border border-transparent bg-[#E9471F] px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-[#ee7c5f] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
                 >
                   Continue

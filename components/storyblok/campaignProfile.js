@@ -92,12 +92,16 @@ const CampaignProfile = ({ data, generalContent }) => {
   return (
     <div className="m-2 sm:m-0">
       <div className="text-center">
-        <h1 className="font-bold text-xl">{c_data?.content?.name}</h1>
+        <h1 className="font-bold text-3xl">{c_data?.content?.name}</h1>
       </div>
 
       <div className="mt-4 grid sm:grid-cols-2 gap-4">
         <div>
-          <Image src={data.story.content.cover_image.filename} height={200} width={600}/>
+          <Image
+            src={data.story.content.cover_image.filename}
+            height={200}
+            width={600}
+          />
         </div>
         <div className="">
           <div className="w-full bg-gray-200 rounded-sm h-2.5 dark:bg-gray-400">
@@ -107,35 +111,37 @@ const CampaignProfile = ({ data, generalContent }) => {
             ></div>
           </div>
 
-          <div className="space-y-2">
-            <div className="flex flex-col">
-              <span className="font-bold text-2xl">
-                {" "}
-                {c_data?.content?.currency} {responseStat?.data?.totalColl}
-              </span>
-              <span className="text-xs">
-                received of {c_data?.content?.currency}
-                {c_data?.content?.amount_target} goal
-              </span>
+          <div className="space-y-6 flex flex-col ">
+            <div className="">
+              <div className="flex flex-col">
+                <span className="font-bold text-3xl pt-4">
+                  {" "}
+                  {c_data?.content?.currency} {responseStat?.data?.totalColl}
+                </span>
+                <span className="text-sm">
+                  received of {c_data?.content?.currency}
+                  {c_data?.content?.amount_target} goal
+                </span>
+              </div>
+
+              <div className="flex flex-col mt-4">
+                <span className="font-bold text-3xl">
+                  {" "}
+                  {responseStat?.data?.totalDonors}
+                </span>
+                <span className="text-sm">donors</span>
+              </div>
+
+              <div className="flex flex-col mt-4">
+                <span className="font-bold text-3xl">
+                  {" "}
+                  {calculateDaysLeft(c_data?.content?.date_end)}
+                </span>
+                <span className="text-sm">days to go</span>
+              </div>
             </div>
 
-            <div className="flex flex-col">
-              <span className="font-bold text-2xl">
-                {" "}
-                {responseStat?.data?.totalDonors}
-              </span>
-              <span className="text-xs">donors</span>
-            </div>
-
-            <div className="flex flex-col">
-              <span className="font-bold text-2xl">
-                {" "}
-                {calculateDaysLeft(c_data?.content?.date_end)}
-              </span>
-              <span className="text-xs">days to go</span>
-            </div>
-
-            <div className="space-y-4 pt-2 text-center">
+            <div className="space-y-2 sm:pt-20  text-center">
               <div className="w-full">
                 <button
                   onClick={() => handleClick()}

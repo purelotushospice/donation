@@ -19,7 +19,7 @@ export default async function Page() {
       code:"C01",
       title: "Building Bricks for Home of Compassion",
       tag: ["Home of Compassion"],
-      targetAmount:2000,
+      targetAmount:250000,
       description: `With each brick laid, we're not just building walls but
       fostering a community of empathy and support. Together, let's
       build a home where compassion thrives and heals.`,
