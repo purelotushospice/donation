@@ -69,7 +69,7 @@ export default async function Page() {
             <p> Please check your email for receipt </p>
             <div className="py-10 text-center">
               <a
-                href="/home"
+                href="/"
                 className="px-12 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3"
               >
                 Donate again
