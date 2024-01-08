@@ -4,22 +4,49 @@ import { getStoryblokApi } from "@storyblok/react/rsc";
 import StoryblokStory from "@storyblok/react/story";
 import useSWR from "swr";
 import { fetcher } from "@/helper/common";
+import StoryblokClient from "storyblok-js-client";
+import RichTextResolver from "storyblok-js-client/richTextResolver";
+
+let Storyblok = new StoryblokClient({
+  accessToken: process.env.STORYBLOK_API_KEY,
+});
+const renderRichText = (content) => {
+  const resolver = new RichTextResolver();
+  // return  resolver.render(content)
+  return Storyblok.richTextResolver.render(content);
+};
+
+export const metadata = {
+  icons: {
+    icon: 'purelotus_logo.png',
+  },
+};
+
 export default async function Page() {
-  const { data } = await fetchData();
+  // const { data } = await fetchData();
   // const { data: responseStat, error } = useSWR(
   //   `${process.env.NEXT_PUBLIC_API_BASE_URL}v1/campaign/C01`,
   //   fetcher
   // );
+
+  let slug = "home";
+  const storyblokApi = getStoryblokApi();
+  let { data } = await storyblokApi.get(`cdn/stories/${slug}`, {
+    version: "draft",
+    cv: Math.random(),
+  });
+
+  console.log("data story: ", data);
 
   // console.log("data  ", data.story.content.body[0]);
   const pages = [{ name: "Home", href: "/home", current: false }];
   let content_1 = [
     {
       img: "purelotus_43.png",
-      code:"C01",
+      code: "C01",
       title: "Building Bricks for Home of Compassion",
       tag: ["Home of Compassion"],
-      targetAmount:250000,
+      targetAmount: 250000,
       description: `With each brick laid, we're not just building walls but
       fostering a community of empathy and support. Together, let's
       build a home where compassion thrives and heals.`,
@@ -54,14 +81,18 @@ export default async function Page() {
       description: `Empower our cause for Q1 2024. Your donation fuels essential admin operations, maximizing our impact on those in need.`,
     },
   ];
+
+  let contentHeader = data?.story?.content.header[0];
+  console.log("contentHeader: ", contentHeader);
   return (
     <div className="">
+  
       <img src="purelotus.png" className="" />
       <div className="mx-6">
         <div className="mt-4">
           <Breadcrumb pages={pages} />
 
-          <h1 className="font-bold text-3xl pt-4">Pure Lotus Hospice</h1>
+          <h1 className="font-bold text-3xl pt-4">{contentHeader?.title}</h1>
 
           <div className="space-x-1 pt-4">
             <span className="inline-flex items-center rounded-md bg-[#F9BE39] px-2 py-1 text-xs font-bold text-black ring-1 ring-inset ring-gray-500/10">
@@ -72,28 +103,23 @@ export default async function Page() {
             </span>
           </div>
 
-          <div className="space-y-4 pt-2">
-            <p>
-              Pure Lotus Hospice of Compassion, established in 2001 by Venerable
-              Lyan Shih, stands as the sole NGO In-Patient Hospice in Malaysia,
-              offering comprehensive palliative care to impoverished, single,
-              and caregiver-less end-stage cancer patients. Our holistic
-              approach, blending medical, emotional, and spiritual support, aims
-              to uphold dignity and comfort for every individual. Donations form
-              the lifeblood of our mission, enabling us to provide
-              round-the-clock care, create sustainable livelihoods, and extend
-              support to those in need, irrespective of race or religion.
-            </p>
-            <p>
-              Driven by our commitment to compassion and empowerment, we
-              passionately channel contributions towards illuminating paths of
-              hope for those facing their darkest times. Every donation received
-              fuels our efforts to establish a training hub for the mentally
-              challenged, provide spiritual solace integral to end-stage care,
-              and extend bereavement support to families. Your generosity
-              directly impacts lives, ensuring that our beacon of hope continues
-              to shine brightly in the lives of those we serve.
-            </p>
+          {/* <div className="space-y-4 pt-2">
+            <div
+              className="my-3 w-full pt-2 "
+              dangerouslySetInnerHTML={{
+                __html: renderRichText(contentHeader?.introduction),
+              }}
+            ></div>
+          </div> */}
+
+          <div className="space-y-1 richtext ">
+      
+            <div
+              className="my-3 w-full pt-2 "
+              dangerouslySetInnerHTML={{
+                __html: renderRichText(contentHeader?.introduction),
+              }}
+            ></div>
           </div>
 
           <div className="mt-4">
@@ -126,3 +152,34 @@ export async function fetchData() {
   const storyblokApi = getStoryblokApi();
   return storyblokApi.get(`cdn/stories/home`, sbParams);
 }
+
+
+
+export async function generateMetadata({ params, searchParams }, parent) {
+  let slug = params.slug ? params.slug.join("/") : "home";
+  const storyblokApi = getStoryblokApi();
+  let { data } = await storyblokApi.get(`cdn/stories/${slug}`, {
+    version: "draft",
+    cv: Math.random(),
+  });
+  console.log("asasasasa;",data.story?.content?.meta[0]);
+  return {
+    title: !!data?.story?.content?.meta
+      ? data?.story?.content?.meta[0]?.meta_title
+      : "",
+    description: !!data?.story?.content?.meta
+      ? data?.story?.content?.meta[0]?.meta_description
+      : "",
+      openGraph: {
+        images: !!data?.story?.content?.meta
+        ? data?.story?.content?.meta[0]?.meta_image?.filenamef
+        : "",
+      },
+      icons: {
+        icon: '/purelotus_logo.ico',
+      },
+  };
+}
+
+
+

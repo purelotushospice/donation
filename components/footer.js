@@ -25,7 +25,7 @@ export default function Footer() {
                 <a
                   target={"_blank"}
                   rel={"noreferrer"}
-                  href={`mailto:audi_service@ymail.com`}
+                  href={`mailto:donation@purelotushospice.com`}
                 >
                   Write to us
                 </a>
@@ -35,15 +35,15 @@ export default function Footer() {
           <div className="col-span-1 flex gap-10 pt-6">
             <div className="flex flex-col">
               <h2 className="font-bold mb-4">Donation</h2>
-              <Link href={""}>Our Causes</Link>
-              <Link href={""}>DonoCARE</Link>
+              <Link href={"https://donation.purelotushospice.com/"}>Our Causes</Link>
+              <a href={"http://donor.ticketcare.my/"} target="_blank">DonoCARE</a>
             </div>
             <div className="flex flex-col">
               <h2 className="font-bold mb-4">Links</h2>
               <a
                 target="_blank"
                 href={
-                  "https://blog.penang360.my/posts/exploring-balik-pulau-and-its-nearby-activities"
+                  "https://purelotushospice.com/"
                 }
               >
                 Home
@@ -51,7 +51,7 @@ export default function Footer() {
               <a
                 target="_blank"
                 href={
-                  "https://blog.penang360.my/posts/exploring-balik-pulau-and-its-nearby-activities"
+                  "https://purelotushospice.com/services"
                 }
               >
                 Services
@@ -59,7 +59,7 @@ export default function Footer() {
               <a
                 target="_blank"
                 href={
-                  "https://blog.penang360.my/posts/exploring-balik-pulau-and-its-nearby-activities"
+                  "https://purelotushospice.com/about"
                 }
               >
                 About Us
@@ -67,7 +67,7 @@ export default function Footer() {
               <a
                 target="_blank"
                 href={
-                  "https://blog.penang360.my/posts/exploring-balik-pulau-and-its-nearby-activities"
+                  "https://purelotushospice.com/contact"
                 }
               >
                 Sontact Us
@@ -75,7 +75,7 @@ export default function Footer() {
             </div>
             <div className="flex flex-col">
               <h2 className="font-bold mb-4">Admin</h2>
-              <a target="_blank" href={"https://tickets-admin.audipenang.com/"}>
+              <a target="_blank" href={"https://donation-admin.purelotushospice.com/"}>
                 Dashboard
               </a>
               <a

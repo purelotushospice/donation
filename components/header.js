@@ -47,8 +47,9 @@ export default function Header() {
         </div>
         <div className="flex flex-1 items-center justify-end gap-x-6">
           <a
-            href="#"
-            className="rounded-2xl bg-[#02AA9F] px-5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            href="http://donor.ticketcare.my/"
+            target="_blank"
+            className="rounded-2xl bg-[#02AA9F] px-5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-[#3c9c96] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
             DonorCARE
           </a>
