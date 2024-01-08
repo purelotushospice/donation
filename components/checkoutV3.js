@@ -91,6 +91,7 @@ const CheckoutV3 = ({ data, completed }) => {
       countryCode: countryCode,
       country: data?.nationality,
       state: data?.state,
+      bank_charge: bankCharge,
     };
 
     console.log("obj: ", obj);
@@ -276,7 +277,11 @@ const CheckoutV3 = ({ data, completed }) => {
                           />
                         </svg>
                       </button>
+                      <div className="flex flex-col items-center">
                       <span className="text-xl">{quantity}</span>
+                      <span className="text-sm text-gray-400 font-semibold">no. of bricks</span>
+                      </div>
+         
                       <button
                         className="font-bold"
                         type="button"

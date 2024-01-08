@@ -85,7 +85,7 @@ export default function Tab({ data, generalContent }) {
   return (
     <div>
       <div className="mt-4 sm:mt-10">
-        <div className="flex justify-center sm:bg-[#C2EBE8]">
+        <div className="flex justify-center sm:bg-[#C2EBE8] border rounded-lg">
           <div className="">
             <div className=" sm:hidden ">
               <label htmlFor="tabs" className="sr-only">
