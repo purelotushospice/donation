@@ -16,11 +16,11 @@ const renderRichText = (content) => {
   return Storyblok.richTextResolver.render(content);
 };
 
-export const metadata = {
-  icons: {
-    icon: 'purelotus_logo.png',
-  },
-};
+// export const metadata = {
+//   icons: {
+//     icon: 'purelotus_logo.png',
+//   },
+// };
 
 export default async function Page() {
   // const { data } = await fetchData();
