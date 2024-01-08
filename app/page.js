@@ -86,7 +86,6 @@ export default async function Page() {
   console.log("contentHeader: ", contentHeader);
   return (
     <div className="">
-  
       <img src="purelotus.png" className="" />
       <div className="mx-6">
         <div className="mt-4">
@@ -113,7 +112,6 @@ export default async function Page() {
           </div> */}
 
           <div className="space-y-1 richtext ">
-      
             <div
               className="my-3 w-full pt-2 "
               dangerouslySetInnerHTML={{
@@ -153,8 +151,6 @@ export async function fetchData() {
   return storyblokApi.get(`cdn/stories/home`, sbParams);
 }
 
-
-
 export async function generateMetadata({ params, searchParams }, parent) {
   let slug = params.slug ? params.slug.join("/") : "home";
   const storyblokApi = getStoryblokApi();
@@ -162,7 +158,7 @@ export async function generateMetadata({ params, searchParams }, parent) {
     version: "draft",
     cv: Math.random(),
   });
-  console.log("asasasasa;",data.story?.content?.meta[0]);
+  console.log("asasasasa;", data.story?.content?.meta[0]);
   return {
     title: !!data?.story?.content?.meta
       ? data?.story?.content?.meta[0]?.meta_title
@@ -170,16 +166,13 @@ export async function generateMetadata({ params, searchParams }, parent) {
     description: !!data?.story?.content?.meta
       ? data?.story?.content?.meta[0]?.meta_description
       : "",
-      openGraph: {
-        images: !!data?.story?.content?.meta
-        ? data?.story?.content?.meta[0]?.meta_image?.filenamef
+    openGraph: {
+      images: !!data?.story?.content?.meta
+        ? data?.story?.content?.meta[0]?.meta_image?.filename
         : "",
-      },
-      icons: {
-        icon: '/purelotus_logo.ico',
-      },
+    },
+    icons: {
+      icon: "/purelotus_logo.ico",
+    },
   };
 }
-
-
-
