@@ -206,8 +206,8 @@ const CheckoutV3 = ({ data, completed }) => {
                 >
                   <RadioGroup.Label className="text-base font-semibold leading-6 text-gray-900"></RadioGroup.Label>
 
-                  <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-4 sm:gap-y-2 sm:gap-x-4">
-                    <div className="col-span-2 flex flex-col gap-y-2">
+                  <div className="mt-4 grid grid-cols-0 gap-y-6 sm:grid-cols-4 sm:gap-y-2 sm:gap-x-4">
+                    <div className="sm:col-span-2 flex flex-col gap-y-2">
                       {donationOptions.map((mailingList) => (
                         <RadioGroup.Option
                           key={mailingList.id}
@@ -255,8 +255,8 @@ const CheckoutV3 = ({ data, completed }) => {
                         </RadioGroup.Option>
                       ))}
                     </div>
-                    <div className="font-bold flex items-center">X</div>
-                    <div className="-ml-24 mt-14 mb-14 border border-teal-600 rounded-lg flex justify-center items-center gap-6">
+                    <div className="font-bold sm:flex sm:items-center text-center ">X</div>
+                    <div className="sm:-ml-36 sm:mt-14 mb-14 border border-teal-600 rounded-lg flex justify-center items-center gap-6 mx-14 sm:mx-0">
                       <button
                         className="font-bold"
                         type="button"
