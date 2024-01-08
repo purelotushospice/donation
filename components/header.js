@@ -76,18 +76,16 @@ export default function Header() {
           <div className="flex items-center gap-x-6">
             <a href="https://purelotushospice.com" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
-              <Image
-                className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                alt=""
-              />
+              <Image height={50} width={50} src="/purelotus_logo.png" alt="" />
+
             </a>
             <a
-              href="#"
-              className="ml-auto rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-              Sign up
-            </a>
+            href="http://donor.ticketcare.my/"
+            target="_blank"
+            className="rounded-2xl bg-[#02AA9F] px-5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-[#3c9c96] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          >
+            DonorCARE
+          </a>
             <button
               type="button"
               className="-m-2.5 rounded-md p-2.5 text-gray-700"
@@ -110,14 +108,14 @@ export default function Header() {
                   </a>
                 ))}
               </div>
-              <div className="py-6">
+              {/* <div className="py-6">
                 <a
                   href="#"
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Log in
                 </a>
-              </div>
+              </div> */}
             </div>
           </div>
         </Dialog.Panel>

@@ -172,7 +172,7 @@ export async function generateMetadata({ params, searchParams }, parent) {
         : "",
     },
     icons: {
-      icon: "/purelotus_logo.ico",
+      icon: "/purelotus_fav.ico",
     },
   };
 }

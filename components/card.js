@@ -35,7 +35,7 @@ const Card = ({ data, completed,collPercentage }) => {
               style={{ width: `${collPercentage}%` }}
             ></div>
           </div>
-          <div className="p-2 space-y-1">
+          <div className="p-2 space-y-4">
             <h2 className="font-bold">{data?.title}</h2>
             <span className="inline-flex items-center rounded-2xl bg-[#F9BE39] px-2 py-1 text-xs font-bold text-black-600 ring-1 ring-inset ring-gray-500/10">
               {data?.tag}
