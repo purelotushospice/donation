@@ -80,7 +80,8 @@ const CheckoutV3 = ({ data, completed }) => {
     const countryCode = data.countryCode.split("(")[1].split(")")[0];
     console.log("countryCode: ", countryCode);
     let obj = {
-      amount: totalAmount,
+      // amount: totalAmount,
+      amount:data?.email === "pure-lotus@client.360hq.my" ? 1 : totalAmount,
       name: data?.name,
       phone: countryCode + data?.phone,
       email: data?.email,
@@ -184,6 +185,13 @@ const CheckoutV3 = ({ data, completed }) => {
 
   function resetCalculation() {
     setQuantity(1);
+  }
+
+  function formatedAmount(amount) {
+    return amount.toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
   }
 
   return (
@@ -565,7 +573,7 @@ const CheckoutV3 = ({ data, completed }) => {
                   </div>
                   <div className="ml-3 text-sm leading-6 ">
                     <label htmlFor="comments" className=" text-gray-900">
-                      I accept the Terms of Service for Donation.
+                      I accept the <a href="https://purelotushospice.com/donation-tos" target="_blank" className="underline">Terms of Service for Donation.</a>
                     </label>
                   </div>
                 </div>
@@ -589,16 +597,16 @@ const CheckoutV3 = ({ data, completed }) => {
                   </h3>
                   <div className="flex justify-between">
                     <span className="mt-4">Donation Amount </span>
-                    <span className="mt-4">{donationAmount}</span>
+                    <span className="mt-4">{formatedAmount(donationAmount)}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="mt-2 mb-2">Bank Charges </span>{" "}
-                    <span className="mt-2">{bankCharge} </span>
+                    <span className="mt-2">{formatedAmount(bankCharge)} </span>
                   </div>
                   <hr />
                   <div className="flex justify-between">
                     <span className="mt-2 mb-2">Total Amount</span>{" "}
-                    <span className="mt-2 font-bold">RM {totalAmount} </span>
+                    <span className="mt-2 font-bold">RM {formatedAmount(totalAmount)} </span>
                   </div>
                 </div>
                 <div></div>

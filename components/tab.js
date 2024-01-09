@@ -85,9 +85,9 @@ export default function Tab({ data, generalContent }) {
   return (
     <div>
       <div className="mt-4 sm:mt-10">
-        <div className="flex justify-center sm:bg-[#C2EBE8] border rounded-lg">
+        <div className="flex justify-center bg-[#C2EBE8] border rounded-lg">
           <div className="">
-            <div className=" sm:hidden ">
+            <div className="hidden ">
               <label htmlFor="tabs" className="sr-only">
                 Select a tab
               </label>
@@ -105,7 +105,7 @@ export default function Tab({ data, generalContent }) {
               </select>
             </div>
           </div>
-          <div className="hidden sm:block ">
+          <div className="">
             <div className="">
               <nav className="-mb-px flex space-x-8" aria-label="Tabs">
                 {data.map((tab, index) => (

@@ -38,7 +38,7 @@ export default function Header() {
               href={item.href}
               className={classNames(
                 item.disable ? " text-gray-300" : "text-gray-900",
-                "text-sm font-semibold leading-6 "
+                "text-lg font-semibold leading-6 "
               )}
             >
               {item.name}

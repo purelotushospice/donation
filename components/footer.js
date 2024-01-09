@@ -70,7 +70,7 @@ export default function Footer() {
                   "https://purelotushospice.com/contact"
                 }
               >
-                Sontact Us
+                Contact Us
               </a>
             </div>
             <div className="flex flex-col">

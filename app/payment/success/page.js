@@ -63,16 +63,14 @@ export default async function Page() {
             <h3 className="md:text-2xl text-base text-gray-900 font-semibold text-center">
               Payment Done!
             </h3>
-            <p className="text-gray-600 my-2">
-              Thank your for your donation
-            </p>
+            <p className="text-gray-600 my-2">Thank your for your donation</p>
             <p> Please check your email for receipt </p>
             <div className="py-10 text-center">
               <a
                 href="/"
-                className="px-12 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3"
+                className="px-12 bg-[#02AA9F] hover:bg-[#3c9c96] text-white font-semibold py-3"
               >
-                Donate again
+                OK
               </a>
             </div>
           </div>
