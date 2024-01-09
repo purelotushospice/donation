@@ -32,7 +32,7 @@ export default function Footer() {
               </div>
             </p>
           </div>
-          <div className="col-span-1 flex gap-10 pt-6">
+          <div className="col-span-1 flex gap-6 sm:gap-10 pt-6">
             <div className="flex flex-col">
               <h2 className="font-bold mb-4">Donation</h2>
               <Link href={"https://donation.purelotushospice.com/"}>Our Causes</Link>

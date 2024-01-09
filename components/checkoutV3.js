@@ -96,22 +96,22 @@ const CheckoutV3 = ({ data, completed }) => {
     };
 
     console.log("obj: ", obj);
-    // await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}payment/chip`, {
-    //   method: "POST", // or 'PUT'
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(obj),
-    // })
-    //   .then((response) => response.json())
-    //   .then((data2) => {
-    //     setLoading(false);
-    //     window.location.replace(data2?.data?.checkout_url);
-    //   })
-    //   .catch((error) => {
-    //     setLoading(false);
-    //     console.error("Error:", error);
-    //   });
+    await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}payment/chip`, {
+      method: "POST", // or 'PUT'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(obj),
+    })
+      .then((response) => response.json())
+      .then((data2) => {
+        setLoading(false);
+        window.location.replace(data2?.data?.checkout_url);
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.error("Error:", error);
+      });
   };
 
   const fetchData = async () => {
@@ -196,7 +196,7 @@ const CheckoutV3 = ({ data, completed }) => {
 
   return (
     <div className="">
-      <div className="mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8">
+      <div className="mx-auto max-w-2xl px-4 pb-24 sm:pt-16 sm:px-6 lg:max-w-7xl lg:px-8">
         <h2 className="sr-only">Checkout</h2>
 
         <form
@@ -320,7 +320,7 @@ const CheckoutV3 = ({ data, completed }) => {
               </div>
             </div>
 
-            <div className=" border-gray-200 pt-10">
+            <div className=" border-gray-200 sm:pt-10">
               <h2 className="text-lg font-medium text-gray-900">
                 Your Details
               </h2>
@@ -377,8 +377,8 @@ const CheckoutV3 = ({ data, completed }) => {
                 </div>
 
                 <div className=" ">
-                  <div className="grid grid-cols-3 gap-2">
-                    <div className="col-span-1">
+                  <div className="grid grid-cols-4 sm:col-span-3 gap-2">
+                    <div className="col-span-2 sm:col-span-1">
                       <select
                         id="countryCode"
                         name="countryCode"
@@ -395,7 +395,7 @@ const CheckoutV3 = ({ data, completed }) => {
                         ))}
                       </select>
                     </div>
-                    <div className="col-span-2">
+                    <div className="col-span-2 sm:col-span-2">
                       <input
                         type="text"
                         id="phone"
