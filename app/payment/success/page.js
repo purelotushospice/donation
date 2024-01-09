@@ -68,7 +68,7 @@ export default async function Page() {
             <div className="py-10 text-center">
               <a
                 href="/"
-                className="px-12 bg-[#02AA9F] hover:bg-[#3c9c96] text-white font-semibold py-3"
+                className="px-12 bg-[#E9471F] hover:bg-[#ee7c5f] text-white font-semibold py-3 rounded-xl"
               >
                 OK
               </a>
