@@ -9,7 +9,7 @@ import { CheckCircleIcon, TrashIcon } from "@heroicons/react/20/solid";
 import { useRouter, useParams } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { countryNamesAndDialCodes } from "@/helper/countryCode";
+import { countryNamesAndDialCodes, myStateList } from "@/helper/countryCode";
 import useSWR from "swr";
 import { fetcher } from "@/helper/common";
 
@@ -75,13 +75,13 @@ const CheckoutV3 = ({ data, completed }) => {
   //   fetcher
   // );
   const onSubmit = async (data) => {
-    setLoading(true);
+    // setLoading(true);
     console.log("data form: ", data);
     const countryCode = data.countryCode.split("(")[1].split(")")[0];
     console.log("countryCode: ", countryCode);
     let obj = {
       // amount: totalAmount,
-      amount:data?.email === "pure-lotus@client.360hq.my" ? 1 : totalAmount,
+      amount: data?.email === "pure-lotus@client.360hq.my" ? 1 : totalAmount,
       name: data?.name,
       phone: countryCode + data?.phone,
       email: data?.email,
@@ -91,27 +91,27 @@ const CheckoutV3 = ({ data, completed }) => {
       newsUpdate: data?.newUpdate,
       countryCode: countryCode,
       country: data?.nationality,
-      state: data?.state,
+      state: data?.nationality !== "Malaysia" ? data?.stateOutside : data?.state,
       bank_charge: bankCharge,
     };
 
     console.log("obj: ", obj);
-    await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}payment/chip`, {
-      method: "POST", // or 'PUT'
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(obj),
-    })
-      .then((response) => response.json())
-      .then((data2) => {
-        setLoading(false);
-        window.location.replace(data2?.data?.checkout_url);
-      })
-      .catch((error) => {
-        setLoading(false);
-        console.error("Error:", error);
-      });
+    // await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}payment/chip`, {
+    //   method: "POST", // or 'PUT'
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(obj),
+    // })
+    //   .then((response) => response.json())
+    //   .then((data2) => {
+    //     setLoading(false);
+    //     window.location.replace(data2?.data?.checkout_url);
+    //   })
+    //   .catch((error) => {
+    //     setLoading(false);
+    //     console.error("Error:", error);
+    //   });
   };
 
   const fetchData = async () => {
@@ -263,7 +263,9 @@ const CheckoutV3 = ({ data, completed }) => {
                         </RadioGroup.Option>
                       ))}
                     </div>
-                    <div className="font-bold sm:flex sm:items-center text-center ">X</div>
+                    <div className="font-bold sm:flex sm:items-center text-center ">
+                      X
+                    </div>
                     <div className="sm:-ml-36 sm:mt-14 mb-14 border border-teal-600 rounded-lg flex justify-center items-center gap-6 mx-14 sm:mx-0">
                       <button
                         className="font-bold"
@@ -286,10 +288,12 @@ const CheckoutV3 = ({ data, completed }) => {
                         </svg>
                       </button>
                       <div className="flex flex-col items-center">
-                      <span className="text-xl">{quantity}</span>
-                      <span className="text-sm text-gray-400 font-semibold">no. of bricks</span>
+                        <span className="text-xl">{quantity}</span>
+                        <span className="text-sm text-gray-400 font-semibold">
+                          no. of bricks
+                        </span>
                       </div>
-         
+
                       <button
                         className="font-bold"
                         type="button"
@@ -442,22 +446,21 @@ const CheckoutV3 = ({ data, completed }) => {
                         id="state"
                         name="state"
                         className=" block w-full rounded-md border-0 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-teal-600 sm:text-sm sm:leading-6"
-                        defaultValue={"Penang"}
                         required
+                        defaultValue={"Pulau Pinang"}
                         {...register("state")}
                       >
-                        {myStates.map((cnt, idx) => (
+                        {myStateList.map((cnt, idx) => (
                           <option key={idx}>{cnt.name}</option>
                         ))}
                       </select>
                     ) : (
                       <input
                         type="text"
-                        id="state"
-                        name="state"
-                        {...register("state")}
+                        id="stateOutside"
+                        name="stateOutside"
+                        {...register("stateOutside")}
                         placeholder="State"
-                        defaultValue={""}
                         className="block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500 sm:text-sm"
                       />
                     )}
@@ -573,7 +576,14 @@ const CheckoutV3 = ({ data, completed }) => {
                   </div>
                   <div className="ml-3 text-sm leading-6 ">
                     <label htmlFor="comments" className=" text-gray-900">
-                      I accept the <a href="https://purelotushospice.com/donation-tos" target="_blank" className="underline">Terms of Service for Donation.</a>
+                      I accept the{" "}
+                      <a
+                        href="https://purelotushospice.com/donation-tos"
+                        target="_blank"
+                        className="underline"
+                      >
+                        Terms of Service for Donation.
+                      </a>
                     </label>
                   </div>
                 </div>
@@ -597,7 +607,9 @@ const CheckoutV3 = ({ data, completed }) => {
                   </h3>
                   <div className="flex justify-between">
                     <span className="mt-4">Donation Amount </span>
-                    <span className="mt-4">{formatedAmount(donationAmount)}</span>
+                    <span className="mt-4">
+                      {formatedAmount(donationAmount)}
+                    </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="mt-2 mb-2">Bank Charges </span>{" "}
@@ -606,7 +618,9 @@ const CheckoutV3 = ({ data, completed }) => {
                   <hr />
                   <div className="flex justify-between">
                     <span className="mt-2 mb-2">Total Amount</span>{" "}
-                    <span className="mt-2 font-bold">RM {formatedAmount(totalAmount)} </span>
+                    <span className="mt-2 font-bold">
+                      RM {formatedAmount(totalAmount)}{" "}
+                    </span>
                   </div>
                 </div>
                 <div></div>

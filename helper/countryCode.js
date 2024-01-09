@@ -1211,11 +1211,36 @@ const phoneCountryCodeList = [
   },
 ];
 
+const myStates = [
+  { name: "Johor" },
+  { name: "Kedah" },
+  { name: "Kelantan" },
+  { name: "Kuala Lumpur" },
+  { name: "Labuan" },
+  { name: "Melaka" },
+  { name: "Negeri Sembilan" },
+  { name: "Pahang" },
+  { name: "Pulau Pinang" },
+  { name: "Perak" },
+  { name: "Perlis" },
+  { name: "Putrajaya" },
+  { name: "Sabah" },
+  { name: "Sarawak" },
+  { name: "Selangor" },
+  { name: "Terengganu" },
+];
+
 export const phoneCountryCode = phoneCountryCodeList.map((i) => i.name).sort();
 export const countryNamesAndDialCodes = phoneCountryCodeList.map((country) => {
   return {
     name: country.name,
     dial_code: country.dial_code,
+  };
+});
+
+export const myStateList = myStates.map((state) => {
+  return {
+    name: state.name,
   };
 });
 
