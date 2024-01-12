@@ -22,6 +22,9 @@ const renderRichText = (content) => {
 //   },
 // };
 
+
+
+
 export default async function Page() {
   // const { data } = await fetchData();
   // const { data: responseStat, error } = useSWR(
@@ -46,7 +49,7 @@ export default async function Page() {
       code: "C01",
       title: "Building Bricks for Home of Compassion",
       tag: ["Home of Compassion"],
-      targetAmount: 250000,
+      targetAmount: 25000000,
       description: `With each brick laid, we're not just building walls but
       fostering a community of empathy and support. Together, let's
       build a home where compassion thrives and heals.`,
@@ -171,8 +174,8 @@ export async function generateMetadata({ params, searchParams }, parent) {
         ? data?.story?.content?.meta[0]?.meta_image?.filename
         : "",
     },
-    icons: {
-      icon: "/purelotus_fav.ico",
-    },
+    // icons: {
+    //   icon: "/purelotus_fav.ico",
+    // },
   };
 }

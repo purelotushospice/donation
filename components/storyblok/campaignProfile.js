@@ -61,8 +61,11 @@ const CampaignProfile = ({ data, generalContent }) => {
   useEffect(() => {
     if (!!responseStat && !!c_data) {
       console.log();
-      let perc =
-        (responseStat.data.totalColl * 100) / c_data?.content?.amount_target;
+      //  remove 2 digit behind
+
+      let converted = responseStat.data.totalColl.toString().slice(0, -2);
+
+      let perc = (parseInt(converted) * 100) / c_data?.content?.amount_target;
       setcollPercentage(perc);
       console.log("percperc: ", perc);
     }
@@ -89,14 +92,28 @@ const CampaignProfile = ({ data, generalContent }) => {
   const daysLeft = calculateDaysLeft(endDateStr);
 
   function formatedAmount(amount) {
+    let numberString = amount.toString();
+    let result = numberString.slice(0, -2);
+    console.log(result);
+
+    return parseInt(result).toLocaleString(undefined, {
+      // minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  }
+  function formatedAmountV2(amount) {
     return amount.toLocaleString(undefined, {
       // minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     });
   }
 
+  function remove2Digit(amount) {
+    return amount.toLocaleString(undefined, {
+      maximumFractionDigits: 0,
+    });
+  }
 
-  
   return (
     <div className="m-2 sm:m-0">
       <div className="text-center">
@@ -129,7 +146,7 @@ const CampaignProfile = ({ data, generalContent }) => {
                 </span>
                 <span className="text-sm">
                   received of {c_data?.content?.currency}
-                  {formatedAmount(
+                  {formatedAmountV2(
                     parseInt(c_data?.content?.amount_target)
                   )}{" "}
                   goal
@@ -153,22 +170,22 @@ const CampaignProfile = ({ data, generalContent }) => {
               </div>
             </div>
             <div className="hidden sm:block space-y-2 sm:pt-20  text-center">
-                <div className="w-full">
-                  <button
-                    onClick={() => handleClick()}
-                    // href={"/checkout"}
-                    className="bg-[#E9471F] text-white font-semibold px-6 py-2 w-full rounded-md"
-                  >
-                    {generalContent?.content.cta_primary}
-                  </button>
-                </div>
-                <div></div>
-
-                <div className="text-sm text-gray-500">
-                  This campaign will end on{" "}
-                  {dateFormat(data?.story?.content?.date_end)}
-                </div>
+              <div className="w-full">
+                <button
+                  onClick={() => handleClick()}
+                  // href={"/checkout"}
+                  className="bg-[#E9471F] text-white font-semibold px-6 py-2 w-full rounded-md"
+                >
+                  {generalContent?.content.cta_primary}
+                </button>
               </div>
+              <div></div>
+
+              <div className="text-sm text-gray-500">
+                This campaign will end on{" "}
+                {dateFormat(data?.story?.content?.date_end)}
+              </div>
+            </div>
             <div className="block sm:hidden fixed bottom-0 left-0 right-0 p-4 bg-white border-t rounded-t-3xl">
               <div className="space-y-2 sm:pt-20  text-center">
                 <div className="w-full">

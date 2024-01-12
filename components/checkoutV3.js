@@ -97,7 +97,7 @@ const CheckoutV3 = ({ data, completed }) => {
 
     console.log("obj: ", obj);
     await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}payment/chip`, {
-      method: "POST", // or 'PUT'
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
@@ -629,7 +629,7 @@ const CheckoutV3 = ({ data, completed }) => {
                 <button
                   type="submit"
                   disabled={loading ? true : false}
-                  className="w-full rounded-md border border-transparent bg-[#E9471F] px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-[#ee7c5f] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                  className="w-full rounded-md border border-transparent bg-[#E9471F] px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-[#ee7c5f] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50"
                 >
                   Continue
                 </button>

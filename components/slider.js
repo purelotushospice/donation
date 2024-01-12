@@ -36,11 +36,10 @@ const Slider = ({ data, completed }) => {
   };
   useEffect(() => {
     if (!!campaignStat) {
-      console.log("campaignStat: ", campaignStat);
-      console.log("data: ", data);
+     let converted = campaignStat.totalColl.toString().slice(0, -2);
       // console.log();
       let perc =
-        (campaignStat.totalColl * 100) / data[0]?.targetAmount;
+        (parseInt(converted) * 100) / data[0]?.targetAmount;
       setcollPercentage(perc);
       // console.log("percperc: ", perc);
     }
