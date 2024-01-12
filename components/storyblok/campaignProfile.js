@@ -142,7 +142,7 @@ const CampaignProfile = ({ data, generalContent }) => {
                 <span className="font-bold text-3xl pt-4">
                   {" "}
                   {c_data?.content?.currency}{" "}
-                  {formatedAmount(parseInt(responseStat?.data?.totalColl))}
+                  {responseStat?.data?.totalColl !== 0 ? formatedAmount(parseInt(responseStat?.data?.totalColl)) : 0}
                 </span>
                 <span className="text-sm">
                   received of {c_data?.content?.currency}
