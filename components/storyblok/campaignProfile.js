@@ -92,14 +92,20 @@ const CampaignProfile = ({ data, generalContent }) => {
   const daysLeft = calculateDaysLeft(endDateStr);
 
   function formatedAmount(amount) {
-    let numberString = amount.toString();
-    let result = numberString.slice(0, -2);
-    console.log(result);
+    
+    console.log("hereee",amount);
+    if (!isNaN(amount)) {
+      let numberString = amount.toString();
+      let result = numberString.slice(0, -2);
+      console.log(result);
 
-    return parseInt(result).toLocaleString(undefined, {
-      // minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    });
+      return parseInt(result).toLocaleString(undefined, {
+        // minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      });
+    }else{
+      return ""
+    }
   }
   function formatedAmountV2(amount) {
     return amount.toLocaleString(undefined, {
@@ -113,7 +119,7 @@ const CampaignProfile = ({ data, generalContent }) => {
       maximumFractionDigits: 0,
     });
   }
-
+  // if(responseStat!==undefined)
   return (
     <div className="m-2 sm:m-0">
       <div className="text-center">
