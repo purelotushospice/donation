@@ -75,7 +75,7 @@ const CheckoutV3 = ({ data, completed }) => {
   //   fetcher
   // );
   const onSubmit = async (data) => {
-    // setLoading(true);
+    setLoading(true);
     console.log("data form: ", data);
     const countryCode = data.countryCode.split("(")[1].split(")")[0];
     console.log("countryCode: ", countryCode);
@@ -205,7 +205,7 @@ const CheckoutV3 = ({ data, completed }) => {
         >
           <div className="col-span-2">
             <div>
-              <h2 className="text-lg font-medium text-gray-900">Donation</h2>
+              <h2 className="text-lg sm:text-2xl font-medium text-gray-900">Your Donation</h2>
 
               <div className="mt-4">
                 <RadioGroup
@@ -266,7 +266,7 @@ const CheckoutV3 = ({ data, completed }) => {
                     <div className="font-bold sm:flex sm:items-center text-center ">
                       X
                     </div>
-                    <div className="sm:-ml-36 sm:mt-14 mb-14 border border-teal-600 rounded-lg flex justify-center items-center gap-6 mx-14 sm:mx-0">
+                    <div className="sm:-ml-36 sm:mt-14 mb-8 sm:mb-14 border border-teal-600 rounded-lg flex justify-center items-center gap-6 mx-14 sm:mx-0">
                       <button
                         className="font-bold"
                         type="button"
@@ -321,7 +321,7 @@ const CheckoutV3 = ({ data, completed }) => {
             </div>
 
             <div className=" border-gray-200 sm:pt-10">
-              <h2 className="text-lg font-medium text-gray-900">
+              <h2 className="text-lg sm:text-2xl font-medium text-gray-900">
                 Your Details
               </h2>
 
@@ -378,7 +378,7 @@ const CheckoutV3 = ({ data, completed }) => {
 
                 <div className=" ">
                   <div className="grid grid-cols-4 sm:col-span-3 gap-2">
-                    <div className="col-span-2 sm:col-span-1">
+                    <div className="col-span-2 sm:col-span-2">
                       <select
                         id="countryCode"
                         name="countryCode"
@@ -471,10 +471,11 @@ const CheckoutV3 = ({ data, completed }) => {
 
             <h2
               id="contact-info-heading"
-              className="text-lg font-medium text-gray-900 mt-8"
+              className="text-lg sm:text-2xl font-medium text-gray-900 mt-10 "
             >
               Payment method
             </h2>
+            <h3 className="text-xs text-gray-400 mb-5">Powered by CHIP</h3>
             <RadioGroup
               value={selectedPayMethodLists}
               onChange={setSelectedPayMethodLists}
@@ -536,9 +537,9 @@ const CheckoutV3 = ({ data, completed }) => {
             {/* Term and Condition */}
             <h2
               id="contact-info-heading"
-              className="text-lg font-medium text-gray-900 mt-4"
+              className="text-lg sm:text-2xl font-medium text-gray-900 mt-10 mb-5"
             >
-              Terms & Condition
+              Terms & Conditions
             </h2>
 
             <fieldset className="mt-2">
@@ -629,7 +630,7 @@ const CheckoutV3 = ({ data, completed }) => {
                 <button
                   type="submit"
                   disabled={loading ? true : false}
-                  className="w-full rounded-md border border-transparent bg-[#E9471F] px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-[#ee7c5f] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50"
+                  className="w-full rounded-md border border-transparent bg-[#E9471F] px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-[#ee7c5f] "
                 >
                   Continue
                 </button>

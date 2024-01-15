@@ -36,13 +36,13 @@ export default function Tab({ data, generalContent }) {
     }
   };
 
-  function renderTab(data, generalData) {
+  function renderTab(data,details, generalData) {
     console.log("checkccc", generalData);
     return (
       <div className="space-y-1 richtext border border-gray-200 p-4 rounded-lg shadow-lg mb-10">
-        <h3 className="font-bold text-lg ">{generalData[0]?.title}</h3>
+        <h3 className="font-bold text-lg ">{details?.title}</h3>
         <span className="text-xs text-gray-400">
-          {dateFormat(generalData[0]?.last_updated)}
+          {dateFormat(details?.last_updated)}
         </span>
         <hr />
         <div
@@ -142,16 +142,17 @@ export default function Tab({ data, generalContent }) {
             {" "}
             {!!generalContent?.content?.details &&
               generalContent?.content?.details.map((detail, index) =>
-                renderTab(detail.content, generalContent?.content?.details)
+                renderTab(detail.content,detail, generalContent?.content?.details)
               )}
           </>
         ) : currentTab === 1 ? (
           <>
-            {!!generalContent?.content?.updates &&
-              renderTab(
-                generalContent?.content?.updates[0].content,
-                generalContent?.content?.updates
+             {!!generalContent?.content?.updates &&
+              generalContent?.content?.updates.map((updates, index) =>
+                renderTab(updates.content,updates, generalContent?.content?.updates)
               )}
+
+          
             {/* <h3 className="font-bold ">Story</h3> */}
           </>
         ) : null}

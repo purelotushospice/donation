@@ -36,7 +36,7 @@ export default function Footer() {
             <div className="flex flex-col">
               <h2 className="font-bold mb-4">Donation</h2>
               <Link href={"https://donation.purelotushospice.com/"}>Our Causes</Link>
-              <a href={"http://donor.ticketcare.my/"} target="_blank">DonoCARE</a>
+              <a href={"https://donor.ticketcare.my/"} target="_blank">DonoCARE</a>
             </div>
             <div className="flex flex-col">
               <h2 className="font-bold mb-4">Links</h2>

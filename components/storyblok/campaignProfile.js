@@ -92,8 +92,7 @@ const CampaignProfile = ({ data, generalContent }) => {
   const daysLeft = calculateDaysLeft(endDateStr);
 
   function formatedAmount(amount) {
-    
-    console.log("hereee",amount);
+    console.log("hereee", amount);
     if (!isNaN(amount)) {
       let numberString = amount.toString();
       let result = numberString.slice(0, -2);
@@ -103,8 +102,8 @@ const CampaignProfile = ({ data, generalContent }) => {
         // minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       });
-    }else{
-      return ""
+    } else {
+      return "";
     }
   }
   function formatedAmountV2(amount) {
@@ -148,7 +147,9 @@ const CampaignProfile = ({ data, generalContent }) => {
                 <span className="font-bold text-3xl pt-4">
                   {" "}
                   {c_data?.content?.currency}{" "}
-                  {responseStat?.data?.totalColl !== 0 ? formatedAmount(parseInt(responseStat?.data?.totalColl)) : 0}
+                  {responseStat?.data?.totalColl !== 0
+                    ? formatedAmount(parseInt(responseStat?.data?.totalColl))
+                    : 0}
                 </span>
                 <span className="text-sm">
                   received of {c_data?.content?.currency}
@@ -180,11 +181,13 @@ const CampaignProfile = ({ data, generalContent }) => {
                 <button
                   onClick={() => handleClick()}
                   // href={"/checkout"}
-                  className="bg-[#E9471F] text-white font-semibold px-6 py-2 w-full rounded-md"
+                  className="w-full rounded-md border  bg-[#E9471F] px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-[#ee7c5f]  "
+
                 >
                   {generalContent?.content.cta_primary}
                 </button>
               </div>
+              
               <div></div>
 
               <div className="text-sm text-gray-500">
