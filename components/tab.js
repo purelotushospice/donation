@@ -39,7 +39,7 @@ export default function Tab({ data, generalContent }) {
   function renderTab(data, generalData) {
     console.log("checkccc", generalData);
     return (
-      <div className="space-y-1 richtext border border-gray-200 p-4 rounded-lg shadow-lg">
+      <div className="space-y-1 richtext border border-gray-200 p-4 rounded-lg shadow-lg mb-10">
         <h3 className="font-bold text-lg ">{generalData[0]?.title}</h3>
         <span className="text-xs text-gray-400">
           {dateFormat(generalData[0]?.last_updated)}
@@ -141,9 +141,8 @@ export default function Tab({ data, generalContent }) {
           <>
             {" "}
             {!!generalContent?.content?.details &&
-              renderTab(
-                generalContent?.content?.details[0].content,
-                generalContent?.content?.details
+              generalContent?.content?.details.map((detail, index) =>
+                renderTab(detail.content, generalContent?.content?.details)
               )}
           </>
         ) : currentTab === 1 ? (
