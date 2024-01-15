@@ -6,6 +6,7 @@ import useSWR from "swr";
 import { fetcher } from "@/helper/common";
 import StoryblokClient from "storyblok-js-client";
 import RichTextResolver from "storyblok-js-client/richTextResolver";
+import Head from "next/head";
 
 let Storyblok = new StoryblokClient({
   accessToken: process.env.STORYBLOK_API_KEY,
@@ -21,9 +22,6 @@ const renderRichText = (content) => {
 //     icon: 'purelotus_logo.png',
 //   },
 // };
-
-
-
 
 export default async function Page() {
   // const { data } = await fetchData();
@@ -88,24 +86,40 @@ export default async function Page() {
   let contentHeader = data?.story?.content.header[0];
   console.log("contentHeader: ", contentHeader);
   return (
-    <div className="">
-      <img src="purelotus.png" className="" />
-      <div className="mx-6">
-        <div className="mt-4">
-          <Breadcrumb pages={pages} />
+    <>
+      <Head>
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-JDKGM3M1EH"
+        ></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
 
-          <h1 className="font-bold text-3xl pt-4">{contentHeader?.title}</h1>
+            gtag('config', 'G-JDKGM3M1EH');`,
+          }}
+        ></script>
+      </Head>
+      <div className="">
+        <img src="purelotus.png" className="" />
+        <div className="mx-6">
+          <div className="mt-4">
+            <Breadcrumb pages={pages} />
 
-          <div className="space-x-1 pt-4">
-            <span className="inline-flex items-center rounded-md bg-[#F9BE39] px-2 py-1 text-xs font-bold text-black ring-1 ring-inset ring-gray-500/10">
-              Hospice of Compassion
-            </span>
-            <span className="inline-flex items-center rounded-md bg-[#F9BE39] px-2 py-1 text-xs font-bold text-black-600 ring-1 ring-inset ring-gray-500/10">
-              Home of Compassion
-            </span>
-          </div>
+            <h1 className="font-bold text-3xl pt-4">{contentHeader?.title}</h1>
 
-          {/* <div className="space-y-4 pt-2">
+            <div className="space-x-1 pt-4">
+              <span className="inline-flex items-center rounded-md bg-[#F9BE39] px-2 py-1 text-xs font-bold text-black ring-1 ring-inset ring-gray-500/10">
+                Hospice of Compassion
+              </span>
+              <span className="inline-flex items-center rounded-md bg-[#F9BE39] px-2 py-1 text-xs font-bold text-black-600 ring-1 ring-inset ring-gray-500/10">
+                Home of Compassion
+              </span>
+            </div>
+
+            {/* <div className="space-y-4 pt-2">
             <div
               className="my-3 w-full pt-2 "
               dangerouslySetInnerHTML={{
@@ -114,20 +128,22 @@ export default async function Page() {
             ></div>
           </div> */}
 
-          <div className="space-y-1 richtext ">
-            <div
-              className="my-3 w-full pt-2 "
-              dangerouslySetInnerHTML={{
-                __html: renderRichText(contentHeader?.introduction),
-              }}
-            ></div>
-          </div>
+            <div className="space-y-1 richtext ">
+              <div
+                className="my-3 w-full pt-2 "
+                dangerouslySetInnerHTML={{
+                  __html: renderRichText(contentHeader?.introduction),
+                }}
+              ></div>
+            </div>
 
-          <div className="mt-4">
-            <h2 className="font-bold text-3xl pt-4 pb-4">Home of Compassion</h2>
-            <Slider data={content_1} />
-          </div>
-          {/* 
+            <div className="mt-4">
+              <h2 className="font-bold text-3xl pt-4 pb-4">
+                Home of Compassion
+              </h2>
+              <Slider data={content_1} />
+            </div>
+            {/* 
           <div className="mt-8">
             <h2 className="font-bold text-3xl pt-4 pb-4">
               General Fundraising
@@ -141,9 +157,10 @@ export default async function Page() {
             </h2>
             <Slider data={content_3} completed={true}/>
           </div> */}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
