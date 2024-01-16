@@ -4,7 +4,7 @@ const ContentDashboard = ({ blok }) => (
   <div>
     <main
       {...storyblokEditable(blok)}
-      className="grid grid-cols-1 sm:grid-cols-4 gap-10 rounded-2xl"
+      className="grid grid-cols-1 sm:grid-cols-4 sm:gap-10 rounded-2xl"
     >
       {blok.content.map((nestedBlok) => (
         <StoryblokComponent blok={nestedBlok} key={nestedBlok._uid} />
