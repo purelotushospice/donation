@@ -17,13 +17,13 @@ const NestableLink = ({ blok }) => {
     >
       <img
         src={blok?.thumbnail?.filename}
-        className="object-cover h-full w-full rounded-3xl hover:opacity-75 hover:cursor-pointer"
+        className="object-cover h-full w-full rounded-3xl  brightness-75 hover:opacity-75 hover:cursor-pointer"
       />
 
       <div className="absolute bottom-6 left-3">
         <span className="flex flex-col text-xl font-bold text-white">
-          <text>Main Website: </text>
-          <text>Dashboard</text>
+          <text>{blok?.title} </text>
+          {/* <text>Dashboard</text> */}
         </span>
         <div className="pt-4">
           <a
