@@ -76,7 +76,7 @@ export default function Footer() {
             </div>
             <div className="flex flex-col">
               <h2 className="font-bold mb-4">Admin</h2>
-              <a target="_blank" href={"/dashboard"}>
+              <a href={"/dashboard"}>
                 Dashboard
               </a>
               <a
