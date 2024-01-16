@@ -9,7 +9,7 @@ import Image from "next/image";
 const tabs = [
   { name: "Details", href: "#", current: true, disable: false },
   { name: "Updates", href: "#", current: false, disable: false },
-  // { name: "FAQ", href: "#", current: false, disable: true },
+  { name: "FAQ", href: "#", current: false, disable: false },
   // { name: "Comments", href: "#", current: false, disable: true },
   // { name: "Community", href: "#", current: false, disable: true },
 ];
@@ -192,7 +192,7 @@ const CampaignProfile = ({ data, generalContent }) => {
 
               <div className="text-sm text-gray-500">
                 This campaign will end on{" "}
-                {dateFormat(data?.story?.content?.date_end)}
+                {dateFormat(data?.story?.content?.date_end)} {data.story.content.tax_deductible}  
               </div>
             </div>
             <div className="block sm:hidden fixed bottom-0 left-0 right-0 p-4 bg-white border-t rounded-t-3xl">

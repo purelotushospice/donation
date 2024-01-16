@@ -90,5 +90,10 @@ export async function generateMetadata({ params, searchParams }, parent) {
     description: !!data?.story?.content?.meta
       ? data?.story?.content?.meta[0]?.meta_description
       : "",
+    openGraph: {
+      images: !!data?.story?.content?.meta
+      ? data?.story?.content?.meta[0]?.meta_image.filename
+      : "",
+    },
   };
 }

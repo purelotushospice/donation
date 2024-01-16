@@ -36,23 +36,59 @@ export default function Tab({ data, generalContent }) {
     }
   };
 
-  function renderTab(data,details, generalData) {
+  function renderTab(data, details, generalData, type) {
     console.log("checkccc", generalData);
-    return (
-      <div className="space-y-1 richtext border border-gray-200 p-4 rounded-lg shadow-lg mb-10">
-        <h3 className="font-bold text-lg ">{details?.title}</h3>
-        <span className="text-xs text-gray-400">
-          {dateFormat(details?.last_updated)}
-        </span>
-        <hr />
-        <div
-          className="my-3 w-full pt-2 "
-          dangerouslySetInnerHTML={{
-            __html: renderRichText(data),
-          }}
-        ></div>
-      </div>
-    );
+    if (type == 1) {
+      return (
+        <div className="space-y-1 richtext border border-gray-200 p-4 rounded-lg shadow-lg mb-10">
+          <h3 className="font-bold text-lg ">{details?.title}</h3>
+          <span className="text-xs text-gray-400">
+            {dateFormat(details?.last_updated)}
+          </span>
+          <hr />
+          <div
+            className="my-3 w-full pt-2 "
+            dangerouslySetInnerHTML={{
+              __html: renderRichText(data),
+            }}
+          ></div>
+        </div>
+      );
+    } else if (type == 2) {
+      return (
+        <div className="space-y-4 mb-4">
+          <details className="group border-s-4 border-[#02AA9F] bg-gray-50 p-6 [&_summary::-webkit-details-marker]:hidden">
+            <summary className="flex cursor-pointer items-center justify-between gap-1.5">
+              <h2 className="text-lg font-medium text-gray-900">
+                {details?.title}
+              </h2>
+
+              <span className="shrink-0 rounded-full bg-white p-1.5 text-gray-900 sm:p-3">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5 shrink-0 transition duration-300 group-open:-rotate-45"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </span>
+            </summary>
+
+            <div
+              className="my-3 w-full pt-2 "
+              dangerouslySetInnerHTML={{
+                __html: renderRichText(data),
+              }}
+            ></div>
+          </details>
+        </div>
+      );
+    }
   }
 
   function dateFormat(date, type) {
@@ -142,17 +178,35 @@ export default function Tab({ data, generalContent }) {
             {" "}
             {!!generalContent?.content?.details &&
               generalContent?.content?.details.map((detail, index) =>
-                renderTab(detail.content,detail, generalContent?.content?.details)
+                renderTab(
+                  detail.content,
+                  detail,
+                  generalContent?.content?.details,
+                  1
+                )
               )}
           </>
         ) : currentTab === 1 ? (
           <>
-             {!!generalContent?.content?.updates &&
+            {!!generalContent?.content?.updates &&
               generalContent?.content?.updates.map((updates, index) =>
-                renderTab(updates.content,updates, generalContent?.content?.updates)
+                renderTab(
+                  updates.content,
+                  updates,
+                  generalContent?.content?.updates,
+                  1
+                )
               )}
 
-          
+            {/* <h3 className="font-bold ">Story</h3> */}
+          </>
+        ) : currentTab === 2 ? (
+          <>
+            {!!generalContent?.content?.faq &&
+              generalContent?.content?.faq.map((faq, index) =>
+                renderTab(faq.content, faq, generalContent?.content?.faq, 2)
+              )}
+
             {/* <h3 className="font-bold ">Story</h3> */}
           </>
         ) : null}
