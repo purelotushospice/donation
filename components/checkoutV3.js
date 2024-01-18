@@ -61,7 +61,7 @@ const CheckoutV3 = ({ data, completed }) => {
   const [bankCharge, setBankCharge] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
   const [quantity, setQuantity] = useState(1);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [campaignStat, setCampaignStat] = useState(null);
   const handleRadioChange = (event) => {
     setSelectedOption(event.target.value);
@@ -91,7 +91,8 @@ const CheckoutV3 = ({ data, completed }) => {
       newsUpdate: data?.newUpdate,
       countryCode: countryCode,
       country: data?.nationality,
-      state: data?.nationality !== "Malaysia" ? data?.stateOutside : data?.state,
+      state:
+        data?.nationality !== "Malaysia" ? data?.stateOutside : data?.state,
       bank_charge: bankCharge,
     };
 
@@ -128,6 +129,9 @@ const CheckoutV3 = ({ data, completed }) => {
       .then((data2) => {
         console.log("fetch stat: ", data2);
         setCampaignStat(data2?.data);
+        if (!!data2?.data?.name) {
+          setLoading(false);
+        }
       })
       .catch((error) => {
         setLoading(false);
@@ -205,7 +209,9 @@ const CheckoutV3 = ({ data, completed }) => {
         >
           <div className="col-span-2">
             <div>
-              <h2 className="text-lg sm:text-2xl font-medium text-gray-900">Your Donation</h2>
+              <h2 className="text-lg sm:text-2xl font-medium text-gray-900">
+                Your Donation
+              </h2>
 
               <div className="mt-4">
                 <RadioGroup
