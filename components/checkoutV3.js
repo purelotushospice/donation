@@ -78,7 +78,7 @@ const CheckoutV3 = ({ data, completed }) => {
   //   fetcher
   // );
   const onSubmit = async (data) => {
-    if (data?.phone === "") {
+    if (data?.phone === "" && data?.phone === null) {
       // alert("Please enter your phone number");
       setPhoneNumberError(true);
     } else {
