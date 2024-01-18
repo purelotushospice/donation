@@ -83,7 +83,7 @@ const CheckoutV3 = ({ data, completed }) => {
       // amount: totalAmount,
       amount: data?.email === "pure-lotus@client.360hq.my" ? 1 : totalAmount,
       name: data?.name,
-      phone: countryCode + data?.phone,
+      phone: data?.phone,
       email: data?.email,
       paymentMethod: selectedPayMethodLists.value,
       campaign: campaignStat?.name,
