@@ -63,11 +63,14 @@ const CheckoutV3 = ({ data, completed }) => {
   const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(true);
   const [campaignStat, setCampaignStat] = useState(null);
+  const [phoneNoError, setPhoneNumberError] = useState(false);
   const handleRadioChange = (event) => {
     setSelectedOption(event.target.value);
   };
   const params = useParams();
-
+  useEffect(() => {
+    setPhoneNumberError(false);
+  }, [watch("phone")]);
   // const { data: responseStat, error } = useSWR(
   //   !!data?.story?.content
   //     ? `${process.env.NEXT_PUBLIC_API_BASE_URL}v1/campaign/${data?.story?.content?.code}`
@@ -75,44 +78,49 @@ const CheckoutV3 = ({ data, completed }) => {
   //   fetcher
   // );
   const onSubmit = async (data) => {
-    setLoading(true);
-    console.log("data form: ", data);
-    const countryCode = data.countryCode.split("(")[1].split(")")[0];
-    console.log("countryCode: ", countryCode);
-    let obj = {
-      // amount: totalAmount,
-      amount: data?.email === "pure-lotus@client.360hq.my" ? 1 : totalAmount,
-      name: data?.name,
-      phone: data?.phone,
-      email: data?.email,
-      paymentMethod: selectedPayMethodLists.value,
-      campaign: campaignStat?.name,
-      campaign_code: params?.id,
-      newsUpdate: data?.newUpdate,
-      countryCode: countryCode,
-      country: data?.nationality,
-      state:
-        data?.nationality !== "Malaysia" ? data?.stateOutside : data?.state,
-      bank_charge: bankCharge,
-    };
+    if (data?.phone === "") {
+      // alert("Please enter your phone number");
+      setPhoneNumberError(true);
+    } else {
+      setLoading(true);
+      console.log("data form: ", data);
+      const countryCode = data.countryCode.split("(")[1].split(")")[0];
+      console.log("countryCode: ", countryCode);
+      let obj = {
+        // amount: totalAmount,
+        amount: data?.email === "pure-lotus@client.360hq.my" ? 1 : totalAmount,
+        name: data?.name,
+        phone: data?.phone,
+        email: data?.email,
+        paymentMethod: selectedPayMethodLists.value,
+        campaign: campaignStat?.name,
+        campaign_code: params?.id,
+        newsUpdate: data?.newUpdate,
+        countryCode: countryCode,
+        country: data?.nationality,
+        state:
+          data?.nationality !== "Malaysia" ? data?.stateOutside : data?.state,
+        bank_charge: bankCharge,
+      };
 
-    console.log("obj: ", obj);
-    await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}payment/chip`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(obj),
-    })
-      .then((response) => response.json())
-      .then((data2) => {
-        setLoading(false);
-        window.location.replace(data2?.data?.checkout_url);
+      console.log("obj: ", obj);
+      await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}payment/chip`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(obj),
       })
-      .catch((error) => {
-        setLoading(false);
-        console.error("Error:", error);
-      });
+        .then((response) => response.json())
+        .then((data2) => {
+          setLoading(false);
+          window.location.replace(data2?.data?.checkout_url);
+        })
+        .catch((error) => {
+          setLoading(false);
+          console.error("Error:", error);
+        });
+    }
   };
 
   const fetchData = async () => {
@@ -416,7 +424,12 @@ const CheckoutV3 = ({ data, completed }) => {
                         }}
                         placeholder="Phone no."
                         className="block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500 sm:text-sm"
-                      />
+                      />{" "}
+                      {phoneNoError && (
+                        <span className="text-xs text-red-400">
+                          Phone number required
+                        </span>
+                      )}
                     </div>
                   </div>
                 </div>
