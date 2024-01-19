@@ -5,17 +5,18 @@ function classNames(...classes) {
 import { useState } from "react";
 import StoryblokClient from "storyblok-js-client";
 import RichTextResolver from "storyblok-js-client/richTextResolver";
-
+import { renderRichText } from "@storyblok/js";
 export default function Tab({ data, generalContent }) {
-  console.log("generalContent in Tab: ", generalContent.content);
+  // console.log("generalContent in Tab: ", generalContent.content);
 
   let Storyblok = new StoryblokClient({
     accessToken: process.env.STORYBLOK_API_KEY,
   });
-  const renderRichText = (content) => {
+  const convertRichText = (content) => {
     const resolver = new RichTextResolver();
     // return  resolver.render(content)
     return Storyblok.richTextResolver.render(content);
+    // return renderRichText(Storyblok.richTextResolver.render(content));
   };
 
   const [currentTab, setCurrentTab] = useState(0);
@@ -37,23 +38,55 @@ export default function Tab({ data, generalContent }) {
   };
 
   function renderTab(data, details, generalData, type) {
-    console.log("checkccc", generalData);
+    console.log("checkccc", details);
     if (type == 1) {
-      return (
-        <div className="space-y-1 richtext border border-gray-200 p-4 rounded-lg shadow-lg mb-10">
-          <h3 className="font-bold text-lg ">{details?.title}</h3>
-          <span className="text-xs text-gray-400">
-            {dateFormat(details?.last_updated)}
-          </span>
-          <hr />
-          <div
+      if (details?.title !== "Video") {
+        return (
+          <div className="space-y-1 richtext border border-gray-200 p-4 rounded-lg shadow-lg mb-10">
+            <h3 className="font-bold text-lg ">{details?.title}</h3>
+            <span className="text-xs text-gray-400">
+              {dateFormat(details?.last_updated)}
+            </span>
+            <hr />
+            <div
+              className="my-3 w-full pt-2 "
+              dangerouslySetInnerHTML={{
+                __html: convertRichText(data),
+              }}
+            ></div>
+
+            {/* <div
             className="my-3 w-full pt-2 "
             dangerouslySetInnerHTML={{
-              __html: renderRichText(data),
+              __html: `<div style="padding: 56.25% 0 0 0; position: relative"><div style="height:100%;left:0;position:absolute;top:0;width:100%"><iframe height="100%" width="100%;" src="https://embed.wave.video/TldZ5p6PzanKRIUH" frameborder="0" allow="autoplay; fullscreen" scrolling="no"></iframe></div></div>`,
             }}
-          ></div>
-        </div>
-      );
+          ></div> */}
+          </div>
+        );
+      } else {
+        return (
+          <div className="space-y-1 richtext border border-gray-200 p-4 rounded-lg shadow-lg mb-10">
+            <h3 className="font-bold text-lg ">{details?.title}</h3>
+            <span className="text-xs text-gray-400">
+              {dateFormat(details?.last_updated)}
+            </span>
+            <hr />
+            {/* <div
+              className="my-3 w-full pt-2 "
+              dangerouslySetInnerHTML={{
+                __html: convertRichText(data),
+              }}
+            ></div> */}
+
+            <div
+              className="my-3 w-full pt-2 "
+              dangerouslySetInnerHTML={{
+                __html: `<div style="padding: 56.25% 0 0 0; position: relative"><div style="height:100%;left:0;position:absolute;top:0;width:100%"><iframe height="100%" width="100%;" src="https://embed.wave.video/TldZ5p6PzanKRIUH" frameborder="0" allow="autoplay; fullscreen" scrolling="no"></iframe></div></div>`,
+              }}
+            ></div>
+          </div>
+        );
+      }
     } else if (type == 2) {
       return (
         <div className="space-y-4 mb-4">
