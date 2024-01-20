@@ -71,12 +71,12 @@ export default function Tab({ data, generalContent }) {
               {dateFormat(details?.last_updated)}
             </span>
             <hr />
-            {/* <div
+            <div
               className="my-3 w-full pt-2 "
               dangerouslySetInnerHTML={{
                 __html: convertRichText(data),
               }}
-            ></div> */}
+            ></div>
 
             <div
               className="my-3 w-full pt-2 "
@@ -115,7 +115,7 @@ export default function Tab({ data, generalContent }) {
             <div
               className="my-3 w-full pt-2 "
               dangerouslySetInnerHTML={{
-                __html: renderRichText(data),
+                __html: convertRichText(data),
               }}
             ></div>
           </details>
