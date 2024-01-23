@@ -58,6 +58,9 @@ export async function generateStaticParams() {
     if (slug == "home") {
       return;
     }
+    if (slug == "/dashboard") {
+      return;
+    }
 
     let splittedSlug = slug.split("/");
 
@@ -65,7 +68,7 @@ export async function generateStaticParams() {
       (splittedSlug.length > 1 && splittedSlug[0] === "profile") ||
       splittedSlug[0] === "" ||
       splittedSlug[0] === "/" ||
-      splittedSlug[0] === "home"
+      splittedSlug[0] === "home" || splittedSlug[0] === "dashboard"
     ) {
       return;
     }
