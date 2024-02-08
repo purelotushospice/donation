@@ -36,7 +36,7 @@ export default function Footer() {
             <div className="flex flex-col">
               <h2 className="font-bold mb-4">Donation</h2>
               <Link href={"https://donation.purelotushospice.com/"}>Our Causes</Link>
-              <a href={"https://donor.ticketcare.my/"} target="_blank">DonoCARE</a>
+              <a href={"https://app.donorcare.my/"} target="_blank">DonorCARE</a>
               <a href={"https://purelotushospice.com/donation-tos"} target="_blank">Terms of Service</a>
             </div>
             <div className="flex flex-col">
@@ -94,7 +94,7 @@ export default function Footer() {
           Reserved.
         </div>
         <div className="italic text-center text-xs  mb-6">
-        Made with ♥️ by TicketCARE
+        Made with ♥️ by DonorCARE
         </div>
       </div>
     </div>

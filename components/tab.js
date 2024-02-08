@@ -2,13 +2,12 @@
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
-import { useState } from "react";
+import { useState,useEffect,useRef } from "react";
 import StoryblokClient from "storyblok-js-client";
 import RichTextResolver from "storyblok-js-client/richTextResolver";
 import { renderRichText } from "@storyblok/js";
 export default function Tab({ data, generalContent }) {
-  // console.log("generalContent in Tab: ", generalContent.content);
-
+  const scrollToRef = useRef(null);
   let Storyblok = new StoryblokClient({
     accessToken: process.env.STORYBLOK_API_KEY,
   });
@@ -20,6 +19,8 @@ export default function Tab({ data, generalContent }) {
   };
 
   const [currentTab, setCurrentTab] = useState(0);
+  const [clientRender, setClientRender] = useState(false);
+
   const [selectedOption, setSelectedOption] = useState("");
 
   const handleCurrentTab = (tabIndex) => {
@@ -27,7 +28,6 @@ export default function Tab({ data, generalContent }) {
   };
   const handleSelectChange = (event) => {
     // Update the state with the selected option value
-    console.log("event: ", event.target.value);
 
     setSelectedOption(event.target.value);
     if (event.target.value === "Details") {
@@ -37,12 +37,34 @@ export default function Tab({ data, generalContent }) {
     }
   };
 
-  function renderTab(data, details, generalData, type) {
-    console.log("checkccc", details);
+  useEffect(() => {
+    // Get the fragment identifier from the URL
+    const fragment = window.location.hash;
+   if(fragment === "#details"){
+    setCurrentTab(0)
+   }else if(fragment === "#update"){
+    setCurrentTab(1)
+   }else{
+    setCurrentTab(2)
+   }
+   setClientRender(true)
+  //  scrollToRef.current.scrollIntoView({ behavior: 'smooth' });
+
+    // You can use the fragment identifier for further processing
+    // For example, scroll to an element with the corresponding ID
+    // document.getElementById(fragment.slice(1)).scrollIntoView();
+
+    // Alternatively, you can manipulate the URL without reloading
+    // router.push(router.pathname, undefined, { shallow: true });
+
+    // Ensure to add window.location.hash to the dependency array to react to changes
+  }, []);
+
+  function renderTab(data, details, generalData, type,scrollToRef) {
     if (type == 1) {
       if (details?.title !== "Video") {
         return (
-          <div className="space-y-1 richtext border border-gray-200 p-4 rounded-lg shadow-lg mb-10">
+          <div  className="space-y-1 richtext border border-gray-200 p-4 rounded-lg shadow-lg mb-10">
             <h3 className="font-bold text-lg ">{details?.title}</h3>
             <span className="text-xs text-gray-400">
               {dateFormat(details?.last_updated)}
@@ -65,7 +87,7 @@ export default function Tab({ data, generalContent }) {
         );
       } else {
         return (
-          <div className="space-y-1 richtext border border-gray-200 p-4 rounded-lg shadow-lg mb-10">
+          <div ref={scrollToRef} className="space-y-1 richtext border border-gray-200 p-4 rounded-lg shadow-lg mb-10">
             <h3 className="font-bold text-lg ">{details?.title}</h3>
             <span className="text-xs text-gray-400">
               {dateFormat(details?.last_updated)}
@@ -141,16 +163,14 @@ export default function Tab({ data, generalContent }) {
     ];
     if (date !== null && !!date) {
       const dateObj = date.split("-");
-      console.log("dateObj: ", dateObj);
       let month = monthList.filter((data) => data.value == dateObj[1]);
-      console.log("filter_month: ", month);
 
       let day = dateObj[2].split(" ");
-      console.log(day);
       return `${month[0].name} ${day[0]}, ${dateObj[0]}`;
     }
   }
-
+ 
+  if(clientRender)
   return (
     <div>
       <div className="mt-4 sm:mt-10">
@@ -215,7 +235,8 @@ export default function Tab({ data, generalContent }) {
                   detail.content,
                   detail,
                   generalContent?.content?.details,
-                  1
+                  1,
+                  scrollToRef
                 )
               )}
           </>
@@ -227,7 +248,8 @@ export default function Tab({ data, generalContent }) {
                   updates.content,
                   updates,
                   generalContent?.content?.updates,
-                  1
+                  1,
+                  scrollToRef
                 )
               )}
 
@@ -237,7 +259,7 @@ export default function Tab({ data, generalContent }) {
           <>
             {!!generalContent?.content?.faq &&
               generalContent?.content?.faq.map((faq, index) =>
-                renderTab(faq.content, faq, generalContent?.content?.faq, 2)
+                renderTab(faq.content, faq, generalContent?.content?.faq, 2,scrollToRef)
               )}
 
             {/* <h3 className="font-bold ">Story</h3> */}

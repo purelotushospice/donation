@@ -3,7 +3,7 @@ import Tab from "../tab";
 import useSWR from "swr";
 import { fetcher } from "helper/common";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter,usePathname,useSearchParams   } from "next/navigation";
 import Image from "next/image";
 
 const tabs = [
@@ -13,11 +13,14 @@ const tabs = [
   // { name: "Comments", href: "#", current: false, disable: true },
   // { name: "Community", href: "#", current: false, disable: true },
 ];
-const CampaignProfile = ({ data, generalContent }) => {
+const CampaignProfile = ({ data,data_causes, generalContent }) => {
   const [collPercentage, setcollPercentage] = useState(0);
   const router = useRouter();
-  // console.log("campaign general:", data.story.content.cover_image.filename);
-  console.log("campaign: ", data);
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+
+  console.log("searchParams",searchParams);
+  console.log("data_causes: ", generalContent);
   let c_data = data?.story;
   const handleClick = (e) => {
     router.push(`/checkout/${data?.story?.content?.code}`);
@@ -122,7 +125,7 @@ const CampaignProfile = ({ data, generalContent }) => {
   return (
     <div className="m-2 sm:m-0">
       <div className="text-center">
-        <h1 className="font-bold text-3xl">{c_data?.content?.name}</h1>
+        <h1 className="font-bold text-3xl">{generalContent?.content.header[0].title}</h1>
       </div>
 
       <div className="mt-4 grid sm:grid-cols-2 gap-4">

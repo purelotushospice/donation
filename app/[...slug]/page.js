@@ -16,6 +16,7 @@ export default async function Page({ params }) {
   // console.log("kajsj: ",data.story.content.details);
 
   let c_Profile = "";
+  let c_Causes = "";
   if (
     !!data?.story?.content?.campaign &&
     data?.story?.content?.campaign !== ""
@@ -24,13 +25,18 @@ export default async function Page({ params }) {
       `cdn/stories/profile/campaign/${data?.story.slug}`,
       { version: "draft", cv: Math.random() }
     );
+    let { data: campaignCauses } = await storyblokApi.get(
+      `cdn/stories/causes/${data?.story.slug}`,
+      { version: "draft", cv: Math.random() }
+    );
     c_Profile = campaignProfile;
+    c_Causes = campaignCauses;
   }
 
   return (
     <div>
       {/* <MetaTags data={data?.story?.content?.meta} /> */}
-      <CampaignProfile data={c_Profile} generalContent={data?.story} />
+      <CampaignProfile data={c_Profile} data_causes={c_Causes} generalContent={data?.story} />
     </div>
   );
 }

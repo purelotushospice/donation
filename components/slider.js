@@ -30,14 +30,14 @@ const Slider = ({ data, completed }) => {
         setCampaignStat(data2?.data);
       })
       .catch((error) => {
-        setLoading(false);
+        // setLoading(false);
         console.error("Error:", error);
       });
   };
   useEffect(() => {
     if (!!campaignStat) {
      let converted = campaignStat.totalColl.toString().slice(0, -2);
-      // console.log();
+      console.log(parseInt(converted) * 100);
       let perc =
         (parseInt(converted) * 100) / data[0]?.targetAmount;
       setcollPercentage(perc);
