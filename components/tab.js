@@ -44,8 +44,10 @@ export default function Tab({ data, generalContent }) {
     setCurrentTab(0)
    }else if(fragment === "#update"){
     setCurrentTab(1)
-   }else{
+   }else if(fragment === "#faq"){
     setCurrentTab(2)
+   }else{
+    setCurrentTab(0)
    }
    setClientRender(true)
   //  scrollToRef.current.scrollIntoView({ behavior: 'smooth' });
