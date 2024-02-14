@@ -42,7 +42,7 @@ export default function Tab({ data, generalContent }) {
     const fragment = window.location.hash;
    if(fragment === "#details"){
     setCurrentTab(0)
-   }else if(fragment === "#update"){
+   }else if(fragment === "#updates"){
     setCurrentTab(1)
    }else if(fragment === "#faq"){
     setCurrentTab(2)
