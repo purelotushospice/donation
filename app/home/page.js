@@ -31,11 +31,14 @@ export default async function Page() {
 
   let slug = "home";
   const storyblokApi = getStoryblokApi();
-  let { data } = await storyblokApi.get(`cdn/stories/${slug}`, {
-    version: "draft",
-    cv: Math.random(),
-  });
-
+  let { data } = await storyblokApi.get(
+    `cdn/stories/${slug}`,
+    {
+      version: "draft",
+      cv: Math.random(),
+    },
+    { cache: "no-store" }
+  );
 
   // console.log("data  ", data.story.content.body[0]);
   const pages = [{ name: "Home", href: "/home", current: false }];
