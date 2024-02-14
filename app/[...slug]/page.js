@@ -11,7 +11,7 @@ export default async function Page({ params }) {
   let { data } = await storyblokApi.get(`cdn/stories/${slug}`, {
     version: "draft",
     cv: Math.random(),
-    revalidate: 3600,
+    cache: "no-store",
   });
 
   // console.log("kajsj: ",data.story.content.details);
@@ -24,11 +24,11 @@ export default async function Page({ params }) {
   ) {
     let { data: campaignProfile } = await storyblokApi.get(
       `cdn/stories/profile/campaign/${data?.story.slug}`,
-      { version: "draft", cv: Math.random() }
+      { version: "draft", cv: Math.random(), cache: "no-store" }
     );
     let { data: campaignCauses } = await storyblokApi.get(
       `cdn/stories/causes/${data?.story.slug}`,
-      { version: "draft", cv: Math.random() }
+      { version: "draft", cv: Math.random(), cache: "no-store" }
     );
     c_Profile = campaignProfile;
     c_Causes = campaignCauses;
@@ -37,7 +37,11 @@ export default async function Page({ params }) {
   return (
     <div>
       {/* <MetaTags data={data?.story?.content?.meta} /> */}
-      <CampaignProfile data={c_Profile} data_causes={c_Causes} generalContent={data?.story} />
+      <CampaignProfile
+        data={c_Profile}
+        data_causes={c_Causes}
+        generalContent={data?.story}
+      />
     </div>
   );
 }
@@ -75,7 +79,8 @@ export async function generateStaticParams() {
       (splittedSlug.length > 1 && splittedSlug[0] === "profile") ||
       splittedSlug[0] === "" ||
       splittedSlug[0] === "/" ||
-      splittedSlug[0] === "home" || splittedSlug[0] === "dashboard"
+      splittedSlug[0] === "home" ||
+      splittedSlug[0] === "dashboard"
     ) {
       return;
     }
@@ -102,8 +107,9 @@ export async function generateMetadata({ params, searchParams }, parent) {
       : "",
     openGraph: {
       images: !!data?.story?.content?.meta
-      ? data?.story?.content?.meta[0]?.meta_image.filename
-      : "",
+        ? data?.story?.content?.meta[0]?.meta_image.filename
+        : "",
     },
   };
 }
+export const revalidate = 3600;
