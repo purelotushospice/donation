@@ -11,6 +11,7 @@ export default async function Page({ params }) {
   let { data } = await storyblokApi.get(`cdn/stories/${slug}`, {
     version: "draft",
     cv: Math.random(),
+    revalidate: 3600,
   });
 
   // console.log("kajsj: ",data.story.content.details);
