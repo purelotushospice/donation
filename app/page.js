@@ -37,7 +37,6 @@ export default async function Page() {
     cv: Math.random(),
   });
 
-  console.log("data story: ", data);
 
   // console.log("data  ", data.story.content.body[0]);
   const pages = [{ name: "Home", href: "/home", current: false }];
@@ -84,7 +83,6 @@ export default async function Page() {
   ];
 
   let contentHeader = data?.story?.content.header[0];
-  console.log("contentHeader: ", contentHeader);
   return (
     <>
       <Head>
@@ -178,7 +176,6 @@ export async function generateMetadata({ params, searchParams }, parent) {
     version: "draft",
     cv: Math.random(),
   });
-  console.log("asasasasa;", data.story?.content?.meta[0]);
   return {
     title: !!data?.story?.content?.meta
       ? data?.story?.content?.meta[0]?.meta_title

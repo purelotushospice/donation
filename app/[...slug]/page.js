@@ -11,7 +11,7 @@ export default async function Page({ params }) {
   let { data } = await storyblokApi.get(`cdn/stories/${slug}`, {
     version: "draft",
     cv: Math.random(),
-    cache: "no-store",
+    // cache: "no-store",
   });
 
   // console.log("kajsj: ",data.story.content.details);
@@ -24,11 +24,11 @@ export default async function Page({ params }) {
   ) {
     let { data: campaignProfile } = await storyblokApi.get(
       `cdn/stories/profile/campaign/${data?.story.slug}`,
-      { version: "draft", cv: Math.random(), cache: "no-store" }
+      { version: "draft", cv: Math.random()}
     );
     let { data: campaignCauses } = await storyblokApi.get(
       `cdn/stories/causes/${data?.story.slug}`,
-      { version: "draft", cv: Math.random(), cache: "no-store" }
+      { version: "draft", cv: Math.random()}
     );
     c_Profile = campaignProfile;
     c_Causes = campaignCauses;

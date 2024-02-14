@@ -19,8 +19,6 @@ const CampaignProfile = ({ data,data_causes, generalContent }) => {
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
-  console.log("searchParams",searchParams);
-  console.log("data_causes: ", generalContent);
   let c_data = data?.story;
   const handleClick = (e) => {
     router.push(`/checkout/${data?.story?.content?.code}`);
@@ -32,7 +30,6 @@ const CampaignProfile = ({ data,data_causes, generalContent }) => {
       : null,
     fetcher
   );
-  console.log("responseStat: ", responseStat);
 
   function dateFormat(date, type) {
     let monthList = [
@@ -51,26 +48,21 @@ const CampaignProfile = ({ data,data_causes, generalContent }) => {
     ];
     if (date !== null && !!date) {
       const dateObj = date.split("-");
-      console.log("dateObj: ", dateObj);
       let month = monthList.filter((data) => data.value == dateObj[1]);
-      console.log("filter_month: ", month);
 
       let day = dateObj[2].split(" ");
-      console.log(day);
       return `${month[0].name} ${day[0]}, ${dateObj[0]}`;
     }
   }
 
   useEffect(() => {
     if (!!responseStat && !!c_data) {
-      console.log();
       //  remove 2 digit behind
 
       let converted = responseStat.data.totalColl.toString().slice(0, -2);
 
       let perc = (parseInt(converted) * 100) / c_data?.content?.amount_target;
       setcollPercentage(perc);
-      console.log("percperc: ", perc);
     }
   }, [responseStat]);
 
@@ -95,11 +87,9 @@ const CampaignProfile = ({ data,data_causes, generalContent }) => {
   const daysLeft = calculateDaysLeft(endDateStr);
 
   function formatedAmount(amount) {
-    console.log("hereee", amount);
     if (!isNaN(amount)) {
       let numberString = amount.toString();
       let result = numberString.slice(0, -2);
-      console.log(result);
 
       return parseInt(result).toLocaleString(undefined, {
         // minimumFractionDigits: 2,

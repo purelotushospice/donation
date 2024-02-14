@@ -10,10 +10,8 @@ import { useEffect, useState } from "react";
 // import "swiper/css";
 
 const Slider = ({ data, completed }) => {
-  console.log("slider: ", data);
   const [campaignStat, setCampaignStat] = useState(null);
   const [collPercentage, setcollPercentage] = useState(0);
- console.log("collPercentage: ", collPercentage);
   const fetchData = async () => {
     await fetch(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}v1/campaign/${data[0]?.code}`,
@@ -26,7 +24,6 @@ const Slider = ({ data, completed }) => {
     )
       .then((response) => response.json())
       .then((data2) => {
-        console.log("fetch stat: ", data2);
         setCampaignStat(data2?.data);
       })
       .catch((error) => {
@@ -37,7 +34,6 @@ const Slider = ({ data, completed }) => {
   useEffect(() => {
     if (!!campaignStat) {
      let converted = campaignStat.totalColl.toString().slice(0, -2);
-      console.log(parseInt(converted) * 100);
       let perc =
         (parseInt(converted) * 100) / data[0]?.targetAmount;
       setcollPercentage(perc);

@@ -83,9 +83,7 @@ const CheckoutV3 = ({ data, completed }) => {
       setPhoneNumberError(true);
     } else {
       setLoading(true);
-      console.log("data form: ", data);
       const countryCode = data.countryCode.split("(")[1].split(")")[0];
-      console.log("countryCode: ", countryCode);
       let obj = {
         // amount: totalAmount,
         amount: data?.email === "pure-lotus@client.360hq.my" ? 1 : totalAmount,
@@ -103,7 +101,6 @@ const CheckoutV3 = ({ data, completed }) => {
         bank_charge: bankCharge,
       };
 
-      console.log("obj: ", obj);
       await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}payment/chip`, {
         method: "POST",
         headers: {
@@ -135,7 +132,6 @@ const CheckoutV3 = ({ data, completed }) => {
     )
       .then((response) => response.json())
       .then((data2) => {
-        console.log("fetch stat: ", data2);
         setCampaignStat(data2?.data);
         if (!!data2?.data?.name) {
           setLoading(false);
@@ -161,7 +157,6 @@ const CheckoutV3 = ({ data, completed }) => {
   }, []);
 
   useEffect(() => {
-    console.log("selecteddonationOptions:", selecteddonationOptions);
 
     if (selecteddonationOptions.value !== undefined) {
       calculateDonation(selecteddonationOptions.value);
@@ -169,7 +164,6 @@ const CheckoutV3 = ({ data, completed }) => {
   }, [selecteddonationOptions]);
 
   useEffect(() => {
-    console.log("selecteddonationOptions:", selecteddonationOptions);
 
     if (selecteddonationOptions.value !== undefined) {
       calculateDonation(selecteddonationOptions.value);
@@ -185,7 +179,6 @@ const CheckoutV3 = ({ data, completed }) => {
 
   function calculateDonation() {
     setDonationAmount(selecteddonationOptions.value * quantity);
-    console.log("paymentMethodList", selectedPayMethodLists);
     if (selectedPayMethodLists.value === "fpx") {
       setTotalAmount(selecteddonationOptions.value * quantity + 1);
       setBankCharge(1);

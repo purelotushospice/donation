@@ -7,7 +7,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 const Card = ({ data, completed, collPercentage }) => {
-  console.log("data; ", data);
   return (
     <>
       {" "}

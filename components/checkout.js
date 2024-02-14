@@ -71,7 +71,6 @@ const Checkout = ({ data, completed }) => {
   // const { id } = router.query;
   const params = useParams()
 
-  console.log("params: ",params);
   const onSubmit = async (data) => {
     let obj = {
       amount: chooseAmount,
@@ -83,7 +82,6 @@ const Checkout = ({ data, completed }) => {
       campaign_code:params?.id
     };
 
-    console.log("obj: ",obj);
     await fetch(`http://localhost:3001/payment/chip`, {
       method: "POST", // or 'PUT'
       headers: {
