@@ -111,7 +111,9 @@ const CheckoutV3 = ({ data, completed }) => {
         .then((response) => response.json())
         .then((data2) => {
           setLoading(false);
-          window.location.replace(data2?.data?.checkout_url);
+          if (!!data2?.data && !!data2?.data?.checkout_url) {
+            window.location.replace(data2?.data?.checkout_url);
+          }
         })
         .catch((error) => {
           setLoading(false);
@@ -157,14 +159,12 @@ const CheckoutV3 = ({ data, completed }) => {
   }, []);
 
   useEffect(() => {
-
     if (selecteddonationOptions.value !== undefined) {
       calculateDonation(selecteddonationOptions.value);
     }
   }, [selecteddonationOptions]);
 
   useEffect(() => {
-
     if (selecteddonationOptions.value !== undefined) {
       calculateDonation(selecteddonationOptions.value);
     }
